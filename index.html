@@ -3,101 +3,80 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GigogFlix - Netflix Clone</title>
+<title>GIGOGFLIX</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#141414;color:#fff;font-family:Helvetica,Arial,sans-serif;overflow-x:hidden}
-header{position:fixed;top:0;width:100%;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:0 4%;height:60px;background:linear-gradient(180deg,rgba(0,0,0,.9),transparent);transition:.4s}
-header.black{background:#141414}
-.logo{color:#E50914;font-size:26px;font-weight:900;letter-spacing:-1px}
-.nav{display:flex;gap:18px;font-size:13px}.nav span{cursor:pointer;opacity:.8}.nav span:hover{opacity:1}
-.search{background:rgba(0,0,0,.6);border:1px solid #555;color:#fff;padding:6px 10px;width:130px;font-size:13px}
-.banner{position:relative;height:92vh;width:100%;overflow:hidden;background:#000}
-.bslide{position:absolute;inset:0;opacity:0;transition:opacity 1s}
-.bslide.active{opacity:1}
-.bslide img{width:100%;height:100%;object-fit:cover}
-.bslide::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,#141414 8%,transparent 50%),linear-gradient(77deg,rgba(0,0,0,.8) 20%,transparent 70%)}
-.bcontent{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:0 4% 110px;max-width:520px}
-.badge{font-size:13px;font-weight:700;margin-bottom:10px;color:#46d369}
-.btitle{font-size:44px;font-weight:900;line-height:1;margin-bottom:12px;text-shadow:2px 2px 6px #000}
-.bdesc{font-size:14px;line-height:1.4;color:#ddd;margin-bottom:18px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+body{background:#141414;color:#fff;font-family:Arial}
+header{position:fixed;top:0;left:0;right:0;z-index:1000;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 4%;background:linear-gradient(to bottom,rgba(0,0,0,.9),transparent);transition:.3s}
+header.scrolled{background:#141414}
+.logo{color:#E50914;font-size:28px;font-weight:900;cursor:pointer}
+.menu{display:flex;gap:16px;font-size:13px;align-items:center}
+.menu span{cursor:pointer;opacity:.8}.menu span:hover{opacity:1}.menu .active{font-weight:700;opacity:1}
+#searchBox{background:rgba(0,0,0,.7);border:1px solid #aaa;color:#fff;padding:6px 10px;width:160px;font-size:13px}
+.banner{position:relative;width:100%;height:88vh;background:#000;overflow:hidden}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .8s}.slide.active{opacity:1}
+.slide img{width:100%;height:100%;object-fit:cover}
+.slide::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,#141414 5%,transparent 40%),linear-gradient(77deg,rgba(0,0,0,.7) 0,transparent 60%)}
+.bcontent{position:absolute;left:4%;bottom:22%;z-index:2;max-width:520px}
+.badge{color:#46d369;font-weight:700;font-size:13px;margin-bottom:8px}
+.btitle{font-size:42px;font-weight:900;margin-bottom:10px;text-shadow:2px 2px 8px #000}
+.bdesc{font-size:14px;color:#e5e5e5;margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .btns{display:flex;gap:10px}
-.btn{padding:10px 24px;border-radius:4px;font-weight:700;font-size:15px;border:none;cursor:pointer}
-.btn-play{background:#fff;color:#000}.btn-play:hover{background:rgba(255,255,255,.7)}
-.btn-more{background:rgba(109,109,110,.7);color:#fff}
-.dots{position:absolute;bottom:90px;right:4%;z-index:3;display:flex;gap:6px}
-.dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer}.dot.active{background:#fff}
-.rows{position:relative;z-index:2;margin-top:-80px;background:#141414;padding-bottom:40px}
-.rtitle{font-size:18px;font-weight:700;margin:22px 0 10px 4%}
-.row{display:flex;gap:8px;overflow-x:auto;padding:0 4% 12px;scrollbar-width:none}.row::-webkit-scrollbar{display:none}
-.card{min-width:165px;height:92px;border-radius:4px;overflow:hidden;background:#222;flex-shrink:0;cursor:pointer;position:relative;transition:.3s}
-.card.big{min-width:145px;height:215px}
-.card:hover{transform:scale(1.07);z-index:2}
-.card img{width:100%;height:100%;object-fit:cover}
-.card-t{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.9));padding:20px 6px 5px;font-size:11px;font-weight:700}
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;align-items:center;justify-content:center;padding:12px}
-.modal.on{display:flex}
-.box{background:#181818;border-radius:8px;width:100%;max-width:860px;max-height:90vh;overflow:auto;position:relative}
-.close{position:absolute;top:12px;right:12px;background:#181818;color:#fff;border:none;width:36px;height:36px;border-radius:50%;font-size:20px;cursor:pointer;z-index:5}
+.btn{padding:10px 22px;border:none;border-radius:4px;font-weight:700;font-size:14px;cursor:pointer}
+.btn-play{background:#fff;color:#000}.btn-info{background:rgba(109,109,110,.7);color:#fff}
+.dots{position:absolute;right:4%;bottom:20%;z-index:3;display:flex;gap:6px}
+.dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer}.dot.active{background:#fff}
+.rows{margin-top:-60px;position:relative;z-index:4;background:#141414;padding-bottom:60px}
+.rtitle{font-size:18px;font-weight:700;margin:24px 0 10px 4%}
+.row{display:flex;gap:8px;overflow-x:auto;padding:0 4% 12px}.row::-webkit-scrollbar{display:none}
+.card{position:relative;min-width:165px;height:94px;background:#222;border-radius:4px;overflow:hidden;flex-shrink:0;cursor:pointer;transition:.25s}
+.card.poster{min-width:145px;height:216px}.card:hover{transform:scale(1.06)}
+.card img{width:100%;height:100%;object-fit:cover;display:block}
+.card span{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(transparent,rgba(0,0,0,.9));padding:18px 6px 6px;font-size:11px;font-weight:700}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:2000;display:none;align-items:center;justify-content:center;padding:14px}.modal.show{display:flex}
+.box{width:100%;max-width:850px;background:#181818;border-radius:6px;overflow:hidden;position:relative}
+.close{position:absolute;top:10px;right:10px;width:36px;height:36px;border-radius:50%;border:none;background:#181818;color:#fff;font-size:20px;cursor:pointer;z-index:2}
 .video{width:100%;aspect-ratio:16/9;background:#000}.video iframe{width:100%;height:100%;border:0}
-.info{padding:18px}
-.info h2{font-size:26px;margin-bottom:8px}
-.meta{font-size:13px;color:#46d369;margin-bottom:10px;display:flex;gap:10px;flex-wrap:wrap}
-.meta span{color:#999}
-.desc2{font-size:14px;line-height:1.5;color:#ddd}
-@media(max-width:600px){.btitle{font-size:26px}.card{min-width:130px;height:73px}.card.big{min-width:105px;height:155px}.bcontent{padding-bottom:80px}}
+.info{padding:18px}.info h2{font-size:24px;margin-bottom:6px}
+.meta{font-size:13px;display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px;color:#999}.meta b{color:#46d369}
+.info p{font-size:14px;line-height:1.5;color:#ccc}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#fff;color:#000;padding:10px 20px;border-radius:4px;font-weight:700;font-size:14px;z-index:3000;display:none}.toast.show{display:block}
+@media(max-width:600px){.btitle{font-size:26px}#searchBox{width:90px}.card{min-width:120px;height:68px}.card.poster{min-width:100px;height:150px}}
 </style>
 </head>
 <body>
-<header id="head"><div style="display:flex;gap:22px;align-items:center"><div class="logo">GIGOGFLIX</div><div class="nav"><span>Home</span><span>TV Shows</span><span>Movies</span><span id="listCount">My List</span></div></div><input class="search" id="s" placeholder="🔍 Search" oninput="search(this.value)"></header>
-
-<div class="banner" id="banner"></div>
-<div class="dots" id="dots"></div>
-
-<div class="rows" id="rows"></div>
-
-<div class="modal" id="modal" onclick="if(event.target.id=='modal')closeM()"><div class="box"><button class="close" onclick="closeM()">✕</button><div class="video"><iframe id="yt" src="" allowfullscreen></iframe></div><div class="info"><h2 id="mt"></h2><div class="meta" id="mm"></div><p class="desc2" id="md"></p><div style="margin-top:14px;display:flex;gap:10px"><button class="btn btn-play" onclick="playY()">▶ Play</button><button class="btn btn-more" onclick="addList()">+ My List</button></div></div></div></div>
-
+<header id="hdr"><div style="display:flex;align-items:center;gap:20px"><div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">GIGOGFLIX</div><div class="menu"><span class="active" onclick="filterCat('all')">Home</span><span onclick="filterCat('action')">TV Shows</span><span onclick="filterCat('all')">Movies</span><span id="myListLabel" onclick="showMyList()">My List</span></div></div><input id="searchBox" placeholder="🔍 Titles" oninput="doSearch(this.value)"></header>
+<div class="banner" id="banner"></div><div class="dots" id="dots"></div><div class="rows" id="rows"></div>
+<div class="modal" id="modal"><div class="box"><button class="close" onclick="closeModal()">✕</button><div class="video"><iframe id="player" src="" allow="autoplay; fullscreen" allowfullscreen></iframe></div><div class="info"><h2 id="mTitle"></h2><div class="meta" id="mMeta"></div><p id="mDesc"></p><div style="margin-top:14px;display:flex;gap:10px"><button class="btn btn-play" onclick="toggleFull()">⛶ Fullscreen</button><button class="btn btn-info" id="addBtn" onclick="toggleList()">+ My List</button></div></div></div></div>
+<div class="toast" id="toast"></div>
 <script>
 const films=[
-{t:"Avengers: Endgame",y:"TcMBFSGVi1c",year:2019,rate:"98% Match",dur:"3h 1m",d:"After the devastating events of Infinity War, the Avengers assemble once more to reverse Thanos' actions and restore balance.",img:"https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg",bg:"https://image.tmdb.org/t/p/original/or06FN3Dka5tukK1e9sl16pB3iy.jpg"},
-{t:"The Batman",y:"mqqft2x_Aa4",year:2022,rate:"92% Match",dur:"2h 55m",d:"Batman ventures into Gotham's underworld when a sadistic killer leaves behind a trail of cryptic clues.",img:"https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg",bg:"https://image.tmdb.org/t/p/original/5P8SmMzSNYKTQSgKyVJ8zTgTQWJw.jpg"},
-{t:"Oppenheimer",y:"uYPbbksJxIg",year:2023,rate:"95% Match",dur:"3h 0m",d:"The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",img:"https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7x2nJsG.jpg",bg:"https://image.tmdb.org/t/p/original/fm6KqXpk3M2HVveHwCrB8heMDQsw.jpg"},
-{t:"Spider-Man: No Way Home",y:"JfVOs4VSpmA",year:2021,rate:"96% Match",dur:"2h 28m",d:"Peter Parker seeks Doctor Strange's help to make people forget he's Spider-Man, but spell goes wrong.",img:"https://image.tmdb.org/t/p/w500/1E5baAaEse26fej7uHcjOgEE2t2.jpg",bg:"https://image.tmdb.org/t/p/original/14QbnygCuTO0vl7CAFmPf04hm1.jpg"},
-{t:"John Wick 4",y:"qEVU3r4jCKA",year:2023,rate:"89% Match",dur:"2h 49m",d:"John Wick uncovers a path to defeating The High Table, but must face a new enemy with powerful alliances.",img:"https://image.tmdb.org/t/p/w500/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",bg:"https://image.tmdb.org/t/p/original/h8gHn0OzBoaefsYseUByqsmEDMY.jpg"},
-{t:"Avatar: The Way of Water",y:"d9MyW72ELq0",year:2022,rate:"91% Match",dur:"3h 12m",d:"Jake Sully lives with his newfound family formed on the extrasolar moon Pandora.",img:"https://image.tmdb.org/t/p/w500/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg",bg:"https://image.tmdb.org/t/p/original/s16H6tpK2utvwDtzZ8Qy4qm5Emw.jpg"},
-{t:"Interstellar",y:"zSWdZVtXT7E",year:2014,rate:"94% Match",dur:"2h 49m",d:"A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",img:"https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",bg:"https://image.tmdb.org/t/p/original/xJHokMbljvjADYdit5QofP4b6o.jpg"},
-{t:"Ne Zha 2",y:"pT68FSWab1Q",year:2025,rate:"97% Match",dur:"2h 24m",d:"The sequel to the animated blockbuster Ne Zha continues the mythical adventure.",img:"https://image.tmdb.org/t/p/w500/qW4crfED8mpNDadSmMdi7ZDzhXF.jpg",bg:"https://image.tmdb.org/t/p/original/qW4crfED8mpNDadSmMdi7ZDzhXF.jpg"}
+{t:"Avengers: Endgame",y:"TcMBFSGVi1c",yr:2019,match:"98% Match",dur:"3h 1m",d:"After Infinity War, the Avengers assemble once more to reverse Thanos' actions and restore balance.",img:"https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg",bg:"https://image.tmdb.org/t/p/original/or06FN3Dka5tukK1e9sl16pB3iy.jpg"},
+{t:"John Wick 4",y:"qEVU3r4jCKA",yr:2023,match:"93% Match",dur:"2h 49m",d:"John Wick uncovers a path to defeating The High Table.",img:"https://image.tmdb.org/t/p/w500/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",bg:"https://image.tmdb.org/t/p/original/h8gHn0OzBoaefsYseUByqsmEDMY.jpg"},
+{t:"The Batman",y:"mqqft2x_Aa4",yr:2022,match:"92% Match",dur:"2h 55m",d:"Batman ventures into Gotham's underworld when a killer leaves cryptic clues.",img:"https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg",bg:"https://image.tmdb.org/t/p/original/5P8SmMzSNYKTQSgKyVJ8zTgTQWJw.jpg"},
+{t:"Spider-Man: No Way Home",y:"JfVOs4VSpmA",yr:2021,match:"96% Match",dur:"2h 28m",d:"Peter Parker seeks Doctor Strange's help to make people forget he's Spider-Man.",img:"https://image.tmdb.org/t/p/w500/1E5baAaEse26fej7uHcjOgEE2t2.jpg",bg:"https://image.tmdb.org/t/p/original/14QbnygCuTO0vl7CAFmPf04hm1.jpg"},
+{t:"Avatar 2",y:"d9MyW72ELq0",yr:2022,match:"91% Match",dur:"3h 12m",d:"Jake Sully lives with his newfound family on Pandora.",img:"https://image.tmdb.org/t/p/w500/s5HQf2gb3lIOCoecA1QEj9aemw.jpg",bg:"https://image.tmdb.org/t/p/original/s16H6tpK2utvwDtzZ8Qy4qm5Emw.jpg"},
+{t:"Interstellar",y:"zSWdZVtXT7E",yr:2014,match:"94% Match",dur:"2h 49m",d:"A team of explorers travel through a wormhole in space.",img:"https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",bg:"https://image.tmdb.org/t/p/original/xJHokMbljvjADYdit5QofP4b6o.jpg"},
+{t:"Oppenheimer",y:"uYPbbksJxIg",yr:2023,match:"95% Match",dur:"3h 0m",d:"The story of J. Robert Oppenheimer and atomic bomb.",img:"https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7x2nJsG.jpg",bg:"https://image.tmdb.org/t/p/original/fm6KqXpk3M2HVveHwCrB8heMDQsw.jpg"},
+{t:"Ne Zha 2",y:"pT68FSWab1Q",yr:2025,match:"97% Match",dur:"2h 24m",d:"Sequel to the animated blockbuster.",img:"https://image.tmdb.org/t/p/w500/qW4crfED8mpNDadSmMdi7ZDzhXF.jpg",bg:"https://image.tmdb.org/t/p/original/qW4crfED8mpNDadSmMdi7ZDzhXF.jpg"}
 ];
-
-let cur=0,curFilm=null,myList=JSON.parse(localStorage.getItem('gigoglist')||'[]');
-
-function renderBanner(){
- const b=document.getElementById('banner'); const d=document.getElementById('dots');
- b.innerHTML=films.map((f,i)=>`<div class="bslide ${i==0?'active':''}"><img src="${f.bg}"><div class="bcontent"><div class="badge">🔴 TOP 10 #${i+1} in Indonesia Today</div><h1 class="btitle">${f.t}</h1><p class="bdesc">${f.d}</p><div class="btns"><button class="btn btn-play" onclick="openM(${i})">▶ Play</button><button class="btn btn-more" onclick="openM(${i})">ⓘ More Info</button></div></div></div>`).join('');
- d.innerHTML=films.map((_,i)=>`<div class="dot ${i==0?'active':''}" onclick="goSlide(${i})"></div>`).join('');
-}
-function goSlide(n){document.querySelectorAll('.bslide').forEach((e,i)=>e.classList.toggle('active',i==n));document.querySelectorAll('.dot').forEach((e,i)=>e.classList.toggle('active',i==n));cur=n;}
-setInterval(()=>{cur=(cur+1)%films.length;goSlide(cur);},5000);
-
-function renderRows(list=films){
- const rows=[{t:"Trending Now",id:"r1",big:false},{t:"Top 10 in Indonesia Today",id:"r2",big:true},{t:"New Releases",id:"r3",big:false},{t:"My List",id:"r4",big:false,list:myList}];
- document.getElementById('rows').innerHTML=rows.map(r=>{
-  const L=r.list||list; if(r.id=='r4' && L.length==0) return '';
-  return `<div><h2 class="rtitle">${r.t}</h2><div class="row">${L.map((f,idx)=>{
-   const oi=films.findIndex(x=>x.t==f.t); return `<div class="card ${r.big?'big':''}" onclick="openM(${oi>=0?oi:0})"><img src="${f.img}" loading="lazy"><div class="card-t">${r.big?'<span style=color:#777;font-size:10px>TOP 10</span><br>':''}${f.t}</div></div>`;
-  }).join('')}${L.length==0?'<p style=padding:10px;color:#777>Belum ada film di list mas</p>':''}</div></div>`;
- }).join('');
-}
-
-function openM(i){curFilm=films[i];document.getElementById('mt').innerText=curFilm.t;document.getElementById('mm').innerHTML=`<b>${curFilm.rate}</b><span>${curFilm.year}</span><span>${curFilm.dur}</span><span>HD</span>`;document.getElementById('md').innerText=curFilm.d;document.getElementById('yt').src=`https://www.youtube.com/embed/${curFilm.y}?autoplay=1`;document.getElementById('modal').classList.add('on');}
-function closeM(){document.getElementById('modal').classList.remove('on');document.getElementById('yt').src='';}
-function playY(){document.getElementById('yt').requestFullscreen?.();}
-function addList(){if(!curFilm)return;if(!myList.find(x=>x.t==curFilm.t)){myList.push(curFilm);localStorage.setItem('gigoglist',JSON.stringify(myList));renderRows();document.getElementById('listCount').innerText=`My List (${myList.length})`;alert('Added to My List ❤️');}}
-function search(q){q=q.toLowerCase();if(!q){renderRows();return;}renderRows(films.filter(f=>f.t.toLowerCase().includes(q)));}
-
-window.addEventListener('scroll',()=>{document.getElementById('head').classList.toggle('black',scrollY>20);});
-renderBanner();renderRows();document.getElementById('listCount').innerText=myList.length?`My List (${myList.length})`:'My List';
+let cur=0,curFilm=null,myList=JSON.parse(localStorage.getItem('gigog_list')||'[]'),currentDisplay=films;
+function toastMsg(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000)}
+function renderBanner(){document.getElementById('banner').innerHTML=films.map((f,i)=>`<div class="slide ${i==0?'active':''}"><img src="${f.bg}" onerror="this.src='${f.img}'"><div class="bcontent"><div class="badge">🔴 TOP 10 #${i+1} in Indonesia Today</div><div class="btitle">${f.t}</div><div class="bdesc">${f.d}</div><div class="btns"><button class="btn btn-play" onclick="openModal(${i})">▶ Play</button><button class="btn btn-info" onclick="openModal(${i})">ⓘ More Info</button></div></div></div>`).join('');document.getElementById('dots').innerHTML=films.map((_,i)=>`<div class="dot ${i==0?'active':''}" onclick="goTo(${i})"></div>`).join('');}
+function goTo(n){document.querySelectorAll('.slide').forEach((s,i)=>s.classList.toggle('active',i==n));document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i==n));cur=n}
+setInterval(()=>{cur=(cur+1)%films.length;goTo(cur)},5000);
+function renderRows(list){currentDisplay=list;const secs=[{title:"Trending Now",films:list,poster:false},{title:"Top 10 in Indonesia Today",films:list,poster:true},{title:"New Releases",films:[...list].reverse(),poster:false},{title:"Action Movies",films:list,poster:false},{title:"My List",films:myList,poster:false,isList:true}];document.getElementById('rows').innerHTML=secs.map(sec=>{if(sec.isList&&sec.films.length==0)return `<div><div class="rtitle">${sec.title}</div><div class="row"><p style="padding:10px;color:#777;font-size:13px">My List kosong mas, klik + My List di film mas!</p></div></div>`;if(sec.films.length==0)return '';return `<div><div class="rtitle">${sec.title}</div><div class="row">${sec.films.map(f=>{const idx=films.findIndex(x=>x.t==f.t);return `<div class="card ${sec.poster?'poster':''}" onclick="openModal(${idx>=0?idx:0})"><img src="${f.img}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x170/222/fff?text=${encodeURIComponent(f.t)}'"><span>${f.t}</span></div>`}).join('')}</div></div>`}).join('');updateListLabel();}
+function updateListLabel(){document.getElementById('myListLabel').textContent=myList.length?`My List (${myList.length})`:'My List'}
+function openModal(i){curFilm=films[i];document.getElementById('mTitle').textContent=curFilm.t;document.getElementById('mMeta').innerHTML=`<b>${curFilm.match}</b><span>${curFilm.yr}</span><span>${curFilm.dur}</span><span>HD</span>`;document.getElementById('mDesc').textContent=curFilm.d;document.getElementById('player').src=`https://www.youtube.com/embed/${curFilm.y}?autoplay=1&rel=0`;document.getElementById('modal').classList.add('show');document.getElementById('addBtn').textContent=myList.find(x=>x.t==curFilm.t)?'✓ In My List':'+ My List';}
+function closeModal(){document.getElementById('modal').classList.remove('show');document.getElementById('player').src='';}
+function toggleFull(){const ifr=document.getElementById('player');if(ifr.requestFullscreen)ifr.requestFullscreen();else toastMsg('Tekan fullscreen di video mas!')}
+function toggleList(){if(!curFilm)return;const ex=myList.find(x=>x.t==curFilm.t);if(ex){myList=myList.filter(x=>x.t!=curFilm.t);toastMsg('Removed from My List')}else{myList.push(curFilm);toastMsg('Added to My List ❤️')}localStorage.setItem('gigog_list',JSON.stringify(myList));document.getElementById('addBtn').textContent=myList.find(x=>x.t==curFilm.t)?'✓ In My List':'+ My List';renderRows(currentDisplay);}
+function doSearch(q){q=q.toLowerCase().trim();if(!q){renderRows(films);return}const f=films.filter(x=>x.t.toLowerCase().includes(q));renderRows(f.length?f:films);if(f.length)toastMsg(`Ketemu ${f.length} film mas!`);}
+function filterCat(c){if(c=='all'){renderRows(films);toastMsg('Home')}else{renderRows(films);toastMsg('TV Shows')}window.scrollTo({top:500,behavior:'smooth'});}
+function showMyList(){renderRows(myList.length?myList:films);toastMsg(myList.length?`My List ada ${myList.length} film mas!`:'My List kosong mas!');document.getElementById('rows').scrollIntoView({behavior:'smooth'});}
+window.addEventListener('scroll',()=>{document.getElementById('hdr').classList.toggle('scrolled',scrollY>10);});
+document.getElementById('modal').addEventListener('click',e=>{if(e.target.id=='modal')closeModal()});
+renderBanner();renderRows(films);
 </script>
 </body>
-  </html>
+</html>
