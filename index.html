@@ -9,55 +9,65 @@
 body{background:#141414;color:#fff;font-family:Helvetica,Arial,sans-serif}
 header{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:0 4%;height:68px;background:linear-gradient(180deg,rgba(0,0,0,.9),transparent);transition:.4s}
 header.scrolled{background:#141414}
-.logo{color:#E50914;font-size:28px;font-weight:900}
-.nav-left{display:flex;align-items:center;gap:30px}
-.nav-links{display:flex;gap:20px;font-size:14px;list-style:none}
-.nav-links li.active{font-weight:700}
+.logo{color:#E50914;font-size:28px;font-weight:900;cursor:pointer}
+.nav-links{display:flex;gap:20px;font-size:14px;list-style:none}.nav-links li.active{font-weight:700}
+.search-box{display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.7);border:1px solid #fff;padding:5px 10px}
+.search-box input{background:transparent;border:none;color:#fff;outline:none;width:140px}
 .banner{position:relative;height:95vh;background:#000;display:flex;align-items:flex-end}
 .banner-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.banner::after{content:'';position:absolute;inset:0;background:linear-gradient(77deg,rgba(0,0,0,.6) 0,transparent 85%),linear-gradient(0deg,#141414 0,transparent 50%)}
+.banner::after{content:'';position:absolute;inset:0;background:linear-gradient(77deg,rgba(0,0,0,.6),transparent 85%),linear-gradient(0deg,#141414 0,transparent 50%)}
 .banner-content{position:relative;z-index:2;padding:0 4% 12%;max-width:520px}
-.badge{font-weight:700;letter-spacing:1px;margin-bottom:15px}
-.banner-title{font-size:48px;font-weight:900;margin-bottom:15px;text-shadow:2px 2px 4px rgba(0,0,0,.8)}
-.banner-desc{font-size:16px;line-height:1.4;margin-bottom:20px}
-.btns{display:flex;gap:10px}
-.btn{padding:10px 28px;border-radius:4px;font-weight:700;font-size:16px;border:none;cursor:pointer}
-.btn-play{background:#fff;color:#000}
-.btn-list{background:rgba(109,109,110,.7);color:#fff}
+.banner-title{font-size:48px;font-weight:900;margin-bottom:15px}
+.banner-desc{font-size:16px;margin-bottom:20px}
+.btn{padding:10px 28px;border-radius:4px;font-weight:700;border:none;cursor:pointer}
+.btn-play{background:#fff;color:#000}.btn-list{background:rgba(109,109,110,.7);color:#fff}
 .rows{margin-top:-80px;position:relative;z-index:3;padding-bottom:50px}
 .row-title{font-size:20px;font-weight:700;margin:0 0 12px 4%}
-.row{display:flex;gap:6px;overflow-x:auto;padding:0 0 10px 4%}
-.row::-webkit-scrollbar{display:none}
-.card{min-width:290px;height:164px;border-radius:4px;overflow:hidden;background:#2f2f2f;flex-shrink:0;cursor:pointer;transition:.3s}
-.card:hover{transform:scale(1.08)}
-.card img{width:100%;height:100%;object-fit:cover}
-.top-row{display:flex;align-items:flex-end;min-width:280px}
+.row{display:flex;gap:6px;overflow-x:auto;padding:0 0 15px 4%}.row::-webkit-scrollbar{display:none}
+.card{min-width:290px;height:164px;border-radius:4px;overflow:hidden;background:#2f2f2f;flex-shrink:0;cursor:pointer;transition:.3s;position:relative}
+.card:hover{transform:scale(1.08)} .card img{width:100%;height:100%;object-fit:cover}
+.card-title{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.9));padding:20px 8px 6px;font-size:12px;font-weight:700}
+.top-row{display:flex;align-items:flex-end;min-width:280px;cursor:pointer}
 .top-num{font-size:140px;font-weight:900;color:#000;-webkit-text-stroke:2px #595959;margin-right:-25px;line-height:.8}
 .top-row .card{min-width:150px;height:200px}
-@media(max-width:768px){.banner{height:70vh}.banner-content{padding:0 15px 25%}.banner-title{font-size:30px}.card{min-width:160px;height:90px}.top-row .card{min-width:95px;height:130px}.top-num{font-size:90px}}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:1000;align-items:center;justify-content:center;padding:20px}
+.modal.active{display:flex}
+.modal-box{background:#181818;border-radius:6px;max-width:850px;width:100%;overflow:hidden;position:relative}
+.modal-close{position:absolute;top:10px;right:10px;background:#181818;color:#fff;border:none;width:36px;height:36px;border-radius:50%;font-size:20px;cursor:pointer;z-index:2}
+.modal-video{width:100%;aspect-ratio:16/9;background:#000} .modal-video iframe{width:100%;height:100%;border:none}
+.modal-info{padding:20px} .modal-info h2{font-size:28px;margin-bottom:10px}
+@media(max-width:768px){.card{min-width:160px;height:90px}.top-row .card{min-width:95px;height:130px}.top-num{font-size:90px}.banner-title{font-size:28px}}
 </style>
 </head>
 <body>
-<header id="header"><div class="nav-left"><div class="logo">GIGOGFLIX</div><ul class="nav-links"><li class="active">Home</li><li>TV Shows</li><li>Movies</li><li>My List</li></ul></div><div>🔍 🔔</div></header>
-<div class="banner">
-<img class="banner-img" src="https://image.tmdb.org/t/p/original/or06FN3Dka5tukK1e9sl16pB3iy.jpg">
-<div class="banner-content">
-<div class="badge">🔴 TOP 10 #1 in Indonesia Today</div>
-<h1 class="banner-title">AVENGERS: ENDGAME</h1>
-<p class="banner-desc">After the devastating events of Infinity War, the Avengers assemble once more to reverse Thanos' actions and restore balance to the universe.</p>
-<div class="btns"><button class="btn btn-play">▶ Play</button><button class="btn btn-list">+ My List</button></div>
-</div>
-</div>
-<div class="rows">
-<div><h2 class="row-title">Trending Now</h2><div class="row" id="trending"></div></div>
-<div><h2 class="row-title">Top 10 in Indonesia Today</h2><div class="row" id="top10"></div></div>
-<div><h2 class="row-title">New Releases</h2><div class="row" id="new"></div></div>
-<div><h2 class="row-title">Action Movies</h2><div class="row" id="action"></div></div>
-</div>
+<header id="header"><div style="display:flex;align-items:center;gap:30px"><div class="logo" onclick="location.reload()">GIGOGFLIX</div><ul class="nav-links"><li class="active">Home</li><li>Movies</li><li>My List</li></ul></div><div class="search-box">🔍 <input id="search" placeholder="Search" oninput="searchFilm(this.value)"></div></header>
+<div class="banner"><img class="banner-img" src="https://image.tmdb.org/t/p/original/or06FN3Dka5tukK1e9sl16pB3iy.jpg"><div class="banner-content"><div style="font-weight:700;margin-bottom:15px">🔴 TOP 10 #1 in Indonesia Today</div><h1 class="banner-title">AVENGERS: ENDGAME</h1><p class="banner-desc">After Infinity War, the Avengers assemble once more to reverse Thanos' actions and restore balance to the universe.</p><div style="display:flex;gap:10px"><button class="btn btn-play" onclick="playTrailer('Avengers: Endgame','TcMBFSGVi1c')">▶ Play</button><button class="btn btn-list" onclick="alert('Added to My List! ❤️')">+ My List</button></div></div></div>
+<div id="allRows" class="rows"><div><h2 class="row-title">Trending Now</h2><div class="row" id="trending"></div></div><div><h2 class="row-title">Top 10 in Indonesia Today</h2><div class="row" id="top10"></div></div><div><h2 class="row-title">New Releases</h2><div class="row" id="new"></div></div><div><h2 class="row-title">Action Movies</h2><div class="row" id="action"></div></div></div>
+<div class="modal" id="modal" onclick="if(event.target.id=='modal')closeModal()"><div class="modal-box"><button class="modal-close" onclick="closeModal()">✕</button><div class="modal-video"><iframe id="yt" src="" allowfullscreen></iframe></div><div class="modal-info"><h2 id="mTitle"></h2><p>Watch trailer in HD - GigogFlix Original</p></div></div></div>
 <script>
-const m=["https://image.tmdb.org/t/p/w500/qW4crfED8mpNDadSmMdi7ZDzhXF.jpg","https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg","https://image.tmdb.org/t/p/w500/1E5baAaEse26fej7uHcjOgEE2t2.jpg","https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg","https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7x2nJsG.jpg","https://image.tmdb.org/t/p/w500/gKkl1xYUlT90BxSgW2M5Y4x2R.jpg"];
-function createRow(id,isTop){const r=document.getElementById(id);m.forEach((s,i)=>{const w=document.createElement('div');if(isTop){w.className='top-row';w.innerHTML=`<div class="top-num">${i+1}</div><div class="card"><img src="${s}"></div>`}else{w.className='card';w.innerHTML=`<img src="${s}">`}r.appendChild(w)})}
-createRow('trending',false);createRow('top10',true);createRow('new',false);createRow('action',false);
+const films=[
+{t:"Ne Zha 2",img:"https://image.tmdb.org/t/p/w500/qW4crfED8mpNDadSmMdi7ZDzhXF.jpg",yt:"pT68FSWab1Q"},
+{t:"The Batman",img:"https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg",yt:"mqqft2x_Aa4"},
+{t:"Oppenheimer",img:"https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7x2nJsG.jpg",yt:"uYPbbksJxIg"},
+{t:"Spider-Man: No Way Home",img:"https://image.tmdb.org/t/p/w500/1E5baAaEse26fej7uHcjOgEE2t2.jpg",yt:"JfVOs4VSpmA"},
+{t:"John Wick 4",img:"https://image.tmdb.org/t/p/w500/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",yt:"qEVU3r4jCKA"},
+{t:"Avatar 2",img:"https://image.tmdb.org/t/p/w500/s5HQf2gb3lIOCoecA1QEj9aemw.jpg",yt:"d9MyW72ELq0"},
+{t:"Avengers: Endgame",img:"https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg",yt:"TcMBFSGVi1c"},
+{t:"Interstellar",img:"https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",yt:"zSWdZVtXT7E"}
+];
+function createRow(id,isTop,list=films){
+ const r=document.getElementById(id);r.innerHTML='';
+ list.forEach((f,i)=>{
+  const w=document.createElement('div');
+  if(isTop){w.className='top-row';w.innerHTML=`<div class="top-num">${i+1}</div><div class="card" onclick="playTrailer('${f.t}','${f.yt}')"><img src="${f.img}"><div class="card-title">${f.t}</div></div>`}
+  else{w.className='card';w.onclick=()=>playTrailer(f.t,f.yt);w.innerHTML=`<img src="${f.img}"><div class="card-title">${f.t}</div>`}
+  r.appendChild(w);
+ });
+}
+createRow('trending',false);createRow('top10',true);createRow('new',false,[...films].reverse());createRow('action',false,[...films].sort(()=>0.5-Math.random()));
+function playTrailer(title,yt){document.getElementById('mTitle').innerText=title;document.getElementById('yt').src=`https://www.youtube.com/embed/${yt}?autoplay=1`;document.getElementById('modal').classList.add('active');}
+function closeModal(){document.getElementById('modal').classList.remove('active');document.getElementById('yt').src='';}
+function searchFilm(q){q=q.toLowerCase();if(!q){createRow('trending',false);return;}const f=films.filter(x=>x.t.toLowerCase().includes(q));createRow('trending',false,f.length?f:films);}
 window.addEventListener('scroll',()=>{document.getElementById('header').classList.toggle('scrolled',scrollY>10)});
 </script>
 </body>
