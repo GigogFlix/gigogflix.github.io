@@ -1,45 +1,120 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>GIGOGFLIX</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GIGOGFLIX - Full Movies</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#000;color:#fff;font-family:Arial}
-#hdr{display:flex;flex-direction:column;gap:10px;padding:12px 15px;background:#000;position:fixed;top:0;left:0;right:0;z-index:100}
-.hdr-top{display:flex;justify-content:space-between;align-items:center}
-.logo{color:#e50914;font-weight:900;font-size:22px}
-.menu{display:flex;gap:10px;font-size:12px;color:#aaa}
-.menu span{cursor:pointer}
-.avatar{background:#e50914;width:28px;height:28px;border-radius:4px;display:flex;align-items:center;justify-content:center}
-#searchBox{width:100%;padding:11px;background:#222;border:1px solid #333;border-radius:8px;color:#fff}
-.banner{height:60vh;min-height:400px;background-size:cover;background-position:center;display:flex;align-items:flex-end;padding:20px;margin-top:105px}
-#rows{padding:15px}
-.cards{display:flex;gap:10px;overflow-x:auto}
-.card{min-width:130px;height:190px;background:#222;border-radius:6px;overflow:hidden;position:relative}
-.card img{width:100%;height:100%;object-fit:cover}
+body{background:#141414;color:#fff;font-family:Arial}
+header{position:fixed;top:0;left:0;right:0;z-index:1000;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 4%;background:linear-gradient(to bottom,rgba(0,0,0,.95),transparent)}
+header.scrolled{background:#141414}
+.logo{color:#E50914;font-size:28px;font-weight:900;cursor:pointer}
+.menu{display:flex;gap:18px;font-size:13px;align-items:center}.menu span{cursor:pointer;opacity:.8}.menu span:hover{opacity:1}
+#searchBox{background:rgba(0,0,0,.6);border:1px solid #555;color:#fff;padding:6px 10px;width:140px;font-size:13px}
+.avatar{width:32px;height:32px;border-radius:4px;background:#E50914;display:flex;align-items:center;justify-content:center;font-weight:700;cursor:pointer}
+.banner{position:relative;width:100%;height:92vh;background:#000;overflow:hidden}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity.9s}.slide.active{opacity:1}
+.slide img{width:100%;height:100%;object-fit:cover}
+.slide::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,#141414 8%,transparent 50%),linear-gradient(77deg,rgba(0,0,0,.85) 15%,transparent 65%)}
+.bcontent{position:absolute;left:4%;bottom:24%;z-index:2;max-width:540px}
+.badge{color:#46d369;font-weight:700;font-size:13px;margin-bottom:8px}
+.btitle{font-size:44px;font-weight:900;margin-bottom:10px}
+.bdesc{font-size:14px;color:#ddd;margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.btns{display:flex;gap:10px}.btn{padding:11px 26px;border:none;border-radius:4px;font-weight:800;font-size:15px;cursor:pointer}
+.btn-play{background:#fff;color:#000}.btn-info{background:rgba(109,109,110,.7);color:#fff}
+.dots{position:absolute;right:4%;bottom:22%;z-index:3;display:flex;gap:6px}.dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.35);cursor:pointer}.dot.active{background:#fff}
+.rows{margin-top:-80px;position:relative;z-index:4;background:#141414;padding-bottom:70px}
+.rtitle{font-size:19px;font-weight:700;margin:26px 0 12px 4%}
+.row{display:flex;gap:9px;overflow-x:auto;padding:0 4% 14px}.row::-webkit-scrollbar{display:none}
+.card{position:relative;min-width:172px;height:97px;background:#222;border-radius:4px;overflow:hidden;flex-shrink:0;cursor:pointer;transition:.25s}.card.poster{min-width:150px;height:225px}.card:hover{transform:scale(1.07)}
+.card img{width:100%;height:100%;object-fit:cover}.card span{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(transparent,rgba(0,0,0,.95));padding:20px 7px 7px;font-size:11px;font-weight:700}
+.loginPage{position:fixed;inset:0;background:#141414;z-index:5000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}.loginPage.hide{display:none}
+.loginLogo{color:#E50914;font-size:36px;font-weight:900;margin-bottom:40px}
+.profiles{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-bottom:30px}
+.profile{cursor:pointer;text-align:center}.pBox{width:120px;height:120px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:48px;font-weight:900;margin-bottom:10px;border:3px solid transparent}.profile:hover.pBox{border-color:#fff}
+.p1{background:#E50914}.p2{background:#0071EB}.p3{background:#FFB400;color:#000}
+.pName{color:#808080;font-size:14px}.profile:hover.pName{color:#fff}
+.loginForm{display:none;flex-direction:column;gap:14px;width:100%;max-width:320px;background:#000;padding:30px;border-radius:6px}.loginForm.show{display:flex}
+.loginForm input{background:#333;border:none;padding:14px;color:#fff;border-radius:4px}.loginForm button{background:#E50914;color:#fff;border:none;padding:14px;border-radius:4px;font-weight:700;cursor:pointer;font-size:16px}
+.playerPage{position:fixed;inset:0;background:#000;z-index:4000;display:none;flex-direction:column}.playerPage.show{display:flex}
+.playerTop{height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 4%;position:absolute;top:0;left:0;right:0;z-index:2}
+.playerVideo{flex:1;display:flex;align-items:center;justify-content:center}.playerVideo iframe{width:100%;height:100%;border:none}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:3000;display:none;align-items:center;justify-content:center;padding:14px}.modal.show{display:flex}
+.box{width:100%;max-width:860px;background:#181818;border-radius:8px;overflow:hidden;position:relative}
+.close{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;border:none;background:#181818;color:#fff;font-size:20px;cursor:pointer;z-index:2}
+.video{width:100%;aspect-ratio:16/9;background:#000}.video iframe{width:100%;height:100%;border:0}
+.info{padding:18px}.info h2{font-size:26px}
+.meta{font-size:13px;display:flex;gap:10px;margin-bottom:10px;color:#999}.meta b{color:#46d369}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#fff;color:#000;padding:12px 22px;border-radius:4px;font-weight:700;font-size:14px;display:none;z-index:6000}.toast.show{display:block}
+@media(max-width:600px){.btitle{font-size:28px}.card{min-width:125px;height:70px}.card.poster{min-width:105px;height:158px}.pBox{width:90px;height:90px;font-size:36px}}
 </style>
 </head>
 <body>
-<header id="hdr">
-<div class="hdr-top">
-<div style="display:flex;gap:12px;align-items:center">
-<div class="logo">GIGOGFLIX</div>
-<div class="menu"><span onclick="location.reload()">Home</span><span>TV Shows</span><span>Movies</span><span>My List</span></div>
+<div class="loginPage" id="loginPage">
+<div class="loginLogo">GIGOGFLIX</div>
+<div id="profileSelect">
+<h2 style="margin-bottom:20px;font-weight:400">Who's watching?</h2>
+<div class="profiles">
+<div class="profile" onclick="selectProfile('Gigog')"><div class="pBox p1">G</div><div class="pName">Gigog</div></div>
+<div class="profile" onclick="selectProfile('Guest')"><div class="pBox p2">😎</div><div class="pName">Guest</div></div>
+<div class="profile" onclick="showLogin()"><div class="pBox p3">+</div><div class="pName">Add Profile</div></div>
 </div>
-<div class="avatar">G</div>
+<button onclick="showLogin()" style="background:none;border:1px solid #808080;color:#808080;padding:8px 18px;margin-top:20px;cursor:pointer">MANAGE PROFILES</button>
 </div>
-<input id="searchBox" placeholder="🔍 Titles" oninput="doSearch(this.value)">
-</header>
-<div class="banner" id="banner" style="background-image:url(https://img.youtube.com/vi/qEVU3r4jCKA/maxresdefault.jpg)"><h1>John Wick 4</h1></div>
-<div id="rows"><div class="cards" id="cards"></div></div>
+<div class="loginForm" id="loginForm">
+<h2>Sign In</h2>
+<input id="email" placeholder="Email" value="gigog@gmail.com">
+<input id="pass" type="password" placeholder="Password" value="123456">
+<button onclick="doLogin()">Sign In</button>
+<p style="font-size:13px;color:#737373;margin-top:10px">Demo: klik Sign In langsung masuk mas!</p>
+<p style="font-size:13px;margin-top:10px;cursor:pointer;color:#fff" onclick="hideLogin()">← Back to profiles</p>
+</div>
+</div>
+
+<header id="hdr"><div style="display:flex;align-items:center;gap:20px"><div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">GIGOGFLIX</div><div class="menu"><span onclick="filterAll()">Home</span><span>TV Shows</span><span>Movies</span><span id="myListLabel" onclick="showMyList()">My List</span></div></div><div style="display:flex;align-items:center;gap:12px"><input id="searchBox" placeholder="🔍 Titles" oninput="doSearch(this.value)"><div class="avatar" id="avatar" onclick="logout()">G</div></div></header>
+<div class="banner" id="banner"></div><div class="dots" id="dots"></div><div class="rows" id="rows"></div>
+<div class="modal" id="modal"><div class="box"><button class="close" onclick="closeModal()">✕</button><div class="video"><iframe id="trailerPlayer" src="" allowfullscreen></iframe></div><div class="info"><h2 id="mTitle"></h2><div class="meta" id="mMeta"></div><p id="mDesc"></p><div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-play" onclick="playFullMovie()">▶ Play Movie</button><button class="btn btn-info" onclick="playTrailerOnly()">▶ Trailer</button><button class="btn btn-info" id="addBtn" onclick="toggleList()">+ My List</button></div></div></div></div>
+<div class="playerPage" id="playerPage"><div class="playerTop"><button style="background:none;border:none;color:#fff;font-size:18px;cursor:pointer" onclick="closePlayer()">← Back to Browse</button><div id="playingTitle" style="font-weight:700"></div><div></div></div><div class="playerVideo"><iframe id="fullPlayer" src="" allowfullscreen></iframe></div><div style="padding:16px 4%;background:#181818;display:flex;justify-content:space-between"><div><div id="pTitle" style="font-weight:700"></div><div style="font-size:12px;color:#999">Now Playing • Full HD</div></div><button class="btn btn-info" onclick="closePlayer()">✕ Close</button></div></div>
+<div class="toast" id="toast"></div>
 <script>
-const films=[{t:"John Wick 4",y:"qEVU3r4jCKA"},{t:"Avengers",y:"TcMBFSGVi1c"},{t:"The Batman",y:"mqqft2x_Aa4"}];
-function render(q=""){const c=document.getElementById('cards');c.innerHTML=films.filter(f=>f.t.toLowerCase().includes(q.toLowerCase())).map(f=>`<div class="card"><img src="https://img.youtube.com/vi/${f.y}/mqdefault.jpg"><div style="position:absolute;bottom:0;background:linear-gradient(transparent,black);width:100%;padding:6px;font-size:11px">${f.t}</div></div>`).join('')}
-function doSearch(v){render(v)}
-render();
+const films=[
+{t:"Avengers: Endgame",y:"TcMBFSGVi1c",full:"TcMBFSGVi1c",yr:2019,match:"98% Match",dur:"3h 1m",d:"After Infinity War, the Avengers assemble once more to reverse Thanos' actions. Full movie!",img:"https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg",bg:"https://image.tmdb.org/t/p/original/or06FN3Dka5tukK1e9sl16pB3iy.jpg"},
+{t:"John Wick 4",y:"qEVU3r4jCKA",full:"qEVU3r4jCKA",yr:2023,match:"93% Match",dur:"2h 49m",d:"John Wick uncovers a path to defeating The High Table.",img:"https://image.tmdb.org/t/p/w500/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",bg:"https://image.tmdb.org/t/p/original/h8gHn0OzBoaefsYseUByqsmEDMY.jpg"},
+{t:"The Batman",y:"mqqft2x_Aa4",full:"mqqft2x_Aa4",yr:2022,match:"92% Match",dur:"2h 55m",d:"Batman ventures into Gotham's underworld.",img:"https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg",bg:"https://image.tmdb.org/t/p/original/5P8SmMzSNYKTQSgKyVJ8zTgTQWJw.jpg"},
+{t:"Spider-Man: No Way Home",y:"JfVOs4VSpmA",full:"JfVOs4VSpmA",yr:2021,match:"96% Match",dur:"2h 28m",d:"Peter Parker's identity revealed.",img:"https://image.tmdb.org/t/p/w500/1E5baAaEse26fej7uHcjOgEE2t2.jpg",bg:"https://image.tmdb.org/t/p/original/14QbnygCuTO0vl7CAFmPf04hm1.jpg"},
+{t:"Avatar: The Way of Water",y:"d9MyW72ELq0",full:"d9MyW72ELq0",yr:2022,match:"91% Match",dur:"3h 12m",d:"Jake Sully lives on Pandora.",img:"https://image.tmdb.org/t/p/w500/s5HQf2gb3lIOCoecA1QEj9aemw.jpg",bg:"https://image.tmdb.org/t/p/original/s16H6tpK2utvwDtzZ8Qy4qm5Emw.jpg"},
+{t:"Interstellar",y:"zSWdZVtXT7E",full:"zSWdZVtXT7E",yr:2014,match:"94% Match",dur:"2h 49m",d:"Explorers travel through wormhole.",img:"https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",bg:"https://image.tmdb.org/t/p/original/xJHokMbljvjADYdit5QofP4b6o.jpg"},
+{t:"Oppenheimer",y:"uYPbbksJxIg",full:"uYPbbksJxIg",yr:2023,match:"95% Match",dur:"3h 0m",d:"Story of Oppenheimer.",img:"https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7x2nJsG.jpg",bg:"https://image.tmdb.org/t/p/original/fm6KqXpk3M2HVveHwCrB8heMDQsw.jpg"},
+{t:"Ne Zha 2",y:"pT68FSWab1Q",full:"pT68FSWab1Q",yr:2025,match:"97% Match",dur:"2h 24m",d:"Animated blockbuster sequel.",img:"https://image.tmdb.org/t/p/w500/qW4crfED8mpNDadSmMdi7ZDzhXF.jpg",bg:"https://image.tmdb.org/t/p/original/qW4crfED8mpNDadSmMdi7ZDzhXF.jpg"}
+];
+let cur=0,curFilm=null,myList=JSON.parse(localStorage.getItem('gigog_list')||'[]'),currentUser=localStorage.getItem('gigog_user')||null,currentDisplay=films;
+function checkLogin(){if(currentUser){document.getElementById('loginPage').classList.add('hide');document.getElementById('avatar').textContent=currentUser[0].toUpperCase();}else{document.getElementById('loginPage').classList.remove('hide');}}
+function selectProfile(name){currentUser=name;localStorage.setItem('gigog_user',name);document.getElementById('avatar').textContent=name[0].toUpperCase();document.getElementById('loginPage').classList.add('hide');toastMsg(`Welcome ${name} mas! 🎉`);}
+function showLogin(){document.getElementById('profileSelect').style.display='none';document.getElementById('loginForm').classList.add('show')}
+function hideLogin(){document.getElementById('profileSelect').style.display='block';document.getElementById('loginForm').classList.remove('show')}
+function doLogin(){const email=document.getElementById('email').value||'Gigog';currentUser=email.split('@')[0];localStorage.setItem('gigog_user',currentUser);document.getElementById('loginPage').classList.add('hide');document.getElementById('avatar').textContent=currentUser[0].toUpperCase();toastMsg(`Welcome ${currentUser} mas!`);}
+function logout(){localStorage.removeItem('gigog_user');currentUser=null;document.getElementById('loginPage').classList.remove('hide');document.getElementById('profileSelect').style.display='block';document.getElementById('loginForm').classList.remove('show');toastMsg('Logged out mas!')}
+function toastMsg(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
+function renderBanner(){document.getElementById('banner').innerHTML=films.map((f,i)=>`<div class="slide ${i==0?'active':''}"><img src="${f.bg}" onerror="this.src='${f.img}'"><div class="bcontent"><div class="badge">🔴 TOP 10 #${i+1} in Indonesia Today</div><div class="btitle">${f.t}</div><div class="bdesc">${f.d}</div><div class="btns"><button class="btn btn-play" onclick="playFullMovieDirect(${i})">▶ Play</button><button class="btn btn-info" onclick="openModal(${i})">ⓘ More Info</button></div></div></div>`).join('');document.getElementById('dots').innerHTML=films.map((_,i)=>`<div class="dot ${i==0?'active':''}" onclick="goTo(${i})"></div>`).join('');}
+function goTo(n){document.querySelectorAll('.slide').forEach((s,i)=>s.classList.toggle('active',i==n));document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i==n));cur=n}
+setInterval(()=>{cur=(cur+1)%films.length;goTo(cur)},5000);
+function renderRows(list){currentDisplay=list;const secs=[{title:"Trending Now",films:list,poster:false},{title:"Top 10 in Indonesia Today",films:list,poster:true},{title:"Continue Watching for "+(currentUser||'You'),films:list.slice(0,4),poster:false,progress:true},{title:"My List",films:myList,poster:false,isList:true}];document.getElementById('rows').innerHTML=secs.map(sec=>{if(sec.isList&&sec.films.length==0)return `<div><div class="rtitle">${sec.title}</div><div class="row"><p style="padding:10px;color:#777;font-size:13px">My List kosong mas!</p></div></div>`;if(sec.films.length==0)return '';return `<div><div class="rtitle">${sec.title}</div><div class="row">${sec.films.map(f=>{const idx=films.findIndex(x=>x.t==f.t);return `<div class="card ${sec.poster?'poster':''}" onclick="openModal(${idx>=0?idx:0})"><img src="${f.img}" loading="lazy"><span>${f.t}</span>${sec.progress?'<div style=position:absolute;bottom:0;left:0;height:3px;background:#E50914;width:'+(30+Math.random()*50)+'%></div>':''}</div>`}).join('')}</div></div>`}).join('');document.getElementById('myListLabel').textContent=myList.length?`My List (${myList.length})`:'My List';}
+function openModal(i){curFilm=films[i];document.getElementById('mTitle').textContent=curFilm.t;document.getElementById('mMeta').innerHTML=`<b>${curFilm.match}</b><span>${curFilm.yr}</span><span>${curFilm.dur}</span><span>HD</span>`;document.getElementById('mDesc').textContent=curFilm.d;document.getElementById('trailerPlayer').src=`https://www.youtube.com/embed/${curFilm.y}?autoplay=1`;document.getElementById('modal').classList.add('show');document.getElementById('addBtn').textContent=myList.find(x=>x.t==curFilm.t)?'✓ In My List':'+ My List';}
+function closeModal(){document.getElementById('modal').classList.remove('show');document.getElementById('trailerPlayer').src='';}
+function playTrailerOnly(){if(!curFilm)return;document.getElementById('trailerPlayer').src=`https://www.youtube.com/embed/${curFilm.y}?autoplay=1`;}
+function playFullMovieDirect(i){curFilm=films[i];playFullMovie()}
+function playFullMovie(){if(!curFilm)return;closeModal();document.getElementById('playerPage').classList.add('show');document.getElementById('fullPlayer').src=`https://www.youtube.com/embed/${curFilm.full}?autoplay=1&rel=0`;document.getElementById('pTitle').textContent=curFilm.t;document.getElementById('playingTitle').textContent=curFilm.t;toastMsg(`Now playing ${curFilm.t} mas! 🎬`);}
+function closePlayer(){document.getElementById('playerPage').classList.remove('show');document.getElementById('fullPlayer').src='';}
+function toggleList(){if(!curFilm)return;const ex=myList.find(x=>x.t==curFilm.t);if(ex){myList=myList.filter(x=>x.t!=curFilm.t);toastMsg('Removed')}else{myList.push(curFilm);toastMsg('Added ❤️')}localStorage.setItem('gigog_list',JSON.stringify(myList));document.getElementById('addBtn').textContent=myList.find(x=>x.t==curFilm.t)?'✓ In My List':'+ My List';renderRows(currentDisplay);}
+function doSearch(q){q=q.toLowerCase().trim();if(!q){renderRows(films);return}const f=films.filter(x=>x.t.toLowerCase().includes(q));renderRows(f.length?f:films);}
+function filterAll(){renderRows(films);}
+function showMyList(){if(myList.length==0){toastMsg('My List kosong mas!');return}renderRows(myList);}
+window.addEventListener('scroll',()=>{document.getElementById('hdr').classList.toggle('scrolled',scrollY>10);});
+document.getElementById('modal').addEventListener('click',e=>{if(e.target.id=='modal')closeModal()});
+checkLogin();renderBanner();renderRows(films);
 </script>
 </body>
 </html>
 
-Jelaskan pungsi dan kegunaan skrip d atas
+Baris keberapa yg hrus d gnti iis gigog
