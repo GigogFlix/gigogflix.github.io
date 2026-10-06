@@ -2,92 +2,34 @@
 <html lang="id">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>GIGOGFLIX - Ultra Premium</title>
+<title>GIGOGFLIX ULTRA PREMIUM</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#060512;color:#fff;font-family:Inter,Arial,sans-serif;overflow-x:hidden}
-body::before{content:"";position:fixed;inset:0;background:radial-gradient(800px 400px at 20% 10%,#2a1a6a 0%,transparent 60%),radial-gradient(600px 400px at 90% 40%,#5a1a4a 0%,transparent 60%),#060512;z-index:-1}
-header{margin:12px 1.5%;padding:10px 18px;border-radius:18px;background:rgba(255,255,255,0.12);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;gap:25px;position:sticky;top:12px;z-index:100}
-.logo{font-weight:900;font-size:22px;letter-spacing:1px;line-height:1}
-.logo small{display:block;font-size:9px;letter-spacing:3px;color:#d4b36a;font-weight:600}
-.logo span.r{color:#ff1a4a;text-shadow:0 0 10px rgba(255,0,60,0.6)}
-nav{display:flex;gap:22px}
-nav a{color:#bbb;text-decoration:none;font-size:14px}nav a.active{color:#fff;border-bottom:2px solid #7af4ff;padding-bottom:3px}
-.search{margin-left:auto;display:flex;align-items:center;gap:12px;position:relative}
-.search input{width:280px;padding:10px 14px 10px 36px;border-radius:12px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.15);color:#fff;outline:none}
-.search::before{content:"🔍";position:absolute;left:12px;opacity:0.6}
-.pills{padding:18px 2%;display:flex;gap:10px;flex-wrap:wrap}
-.pill{padding:8px 16px;border-radius:20px;background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.2);font-size:13px;backdrop-filter:blur(10px);cursor:pointer}
-.pill.active{background:linear-gradient(90deg,#a8f0ff,#ffb3d1);color:#000;font-weight:700}
-.featured{margin:10px 2%;padding:18px;border-radius:20px;background:rgba(255,255,255,0.14);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.18);display:flex;gap:18px;align-items:center}
-.f-left{flex:1}
-.badge{font-size:10px;padding:4px 8px;border-radius:8px;background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3)}
-.f-left h1{font-size:36px;margin:10px 0 4px;letter-spacing:1px;text-shadow:0 0 20px rgba(255,255,255,0.6)}
-.f-left p{font-size:13px;color:#ddd}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
+body{background:#0a0a18;min-height:100vh;padding:12px}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(900px 600px at 15% 15%,#2a1a6e 0%,transparent 60%),radial-gradient(700px 500px at 85% 25%,#6a1a5a 0%,#4a145a 30%,transparent 70%),radial-gradient(800px 600px at 50% 90%,#1a1040 0%,transparent 60%),url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2000');background-size:cover;opacity:0.85;z-index:-2}
+body::after{content:"";position:fixed;inset:0;background:linear-gradient(180deg,rgba(5,5,15,0.3),rgba(5,5,15,0.85));z-index:-1}
+.app{max-width:1180px;margin:0 auto;border-radius:24px;background:rgba(255,255,255,0.08);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border:1px solid rgba(255,255,255,0.14);overflow:hidden;box-shadow:0 20px 80px rgba(0,0,0,0.6)}
+/* HEADER PERSIS */
+.header{margin:14px 14px 0;padding:12px 18px;border-radius:18px;background:linear-gradient(90deg,rgba(255,255,255,0.22),rgba(255,255,255,0.10));border:1px solid rgba(255,255,255,0.22);display:flex;align-items:center;gap:26px}
+.logo{font-weight:900;font-size:20px;letter-spacing:1px;line-height:1.1}
+.logo .top{background:linear-gradient(90deg,#7af4ff,#c2a8ff,#ff9ecf);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.logo .bot{font-size:8.5px;letter-spacing:2.8px;color:#ffcc66;display:flex;align-items:center;gap:4px;margin-top:2px;-webkit-text-fill-color:#ffcc66}
+.nav{display:flex;gap:20px;font-size:13px;color:rgba(255,255,255,0.6)}
+.nav b{color:#fff;border-bottom:2px solid #7af4ff;padding-bottom:3px}
+.search-wrap{margin-left:auto;display:flex;align-items:center;gap:10px;position:relative}
+.search-wrap input{width:240px;padding:9px 12px 9px 34px;border-radius:11px;border:1px solid rgba(255,255,255,0.22);background:rgba(0,0,0,0.35);color:#fff;font-size:12px;outline:none}
+.search-wrap::before{content:"🔍";position:absolute;left:11px;font-size:12px;opacity:0.7}
+.avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#a78bfa,#f472b6)}
+/* PILLS */
+.pills{display:flex;gap:8px;padding:16px 18px}
+.pill{padding:7px 14px;border-radius:999px;font-size:12px;background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.18);color:rgba(255,255,255,0.75)}
+.pill.active{background:linear-gradient(90deg,#aef2ff,#ffc2e0);color:#000;font-weight:800;box-shadow:0 0 16px rgba(174,242,255,0.6);border-color:transparent}
+/* FEATURED */
+.featured{margin:0 18px;padding:18px;border-radius:18px;background:linear-gradient(90deg,rgba(255,255,255,0.22),rgba(255,255,255,0.09));border:1px solid rgba(255,255,255,0.22);display:flex;gap:18px;align-items:center}
+.badge-top{font-size:9px;letter-spacing:1px;padding:5px 9px;border-radius:8px;background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.8)}
+.f-title{font-size:32px;font-weight:900;margin:10px 0 2px;text-shadow:0 0 18px rgba(255,255,255,0.5);letter-spacing:0.5px}
+.f-sub{font-size:11px;color:#d6d0ff}
+.f-desc{font-size:10px;color:rgba(255,255,255,0.55);margin-top:8px}
 .btns{margin-top:14px;display:flex;gap:10px}
-.btn{padding:10px 18px;border-radius:12px;border:none;cursor:pointer;font-weight:700}
-.btn-play{background:linear-gradient(90deg,#7af4ff,#d4b3ff);color:#000}
-.btn-list{background:rgba(255,255,255,0.2);color:#fff;border:1px solid rgba(255,255,255,0.3)}
-.f-right{width:300px;border-radius:14px;overflow:hidden;background:#000;border:1px solid rgba(255,255,255,0.2)}
-.f-right img{width:100%;height:140px;object-fit:cover;display:block}
-.row{padding:18px 2%}
-.row h2{font-size:18px;margin-bottom:12px}
-.movies{display:flex;gap:14px;overflow-x:auto;scrollbar-width:none}
-.movies::-webkit-scrollbar{display:none}
-.card{min-width:185px;width:185px;border-radius:16px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.15);backdrop-filter:blur(12px);overflow:hidden;cursor:pointer;transition:0.3s}
-.card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 10px 30px rgba(124,244,255,0.3)}
-.card img{width:100%;height:175px;object-fit:cover}
-.card-info{padding:10px}
-.card-info h4{font-size:13px}.card-info span{font-size:11px;color:#bbb}
-.glow{box-shadow:0 0 0 1px #7af4ff,0 0 20px rgba(124,244,255,0.6)}
-@media(max-width:768px){nav{display:none}.search input{width:160px}.featured{flex-direction:column}.f-right{width:100%}}
-</style>
-</head>
-<body>
-<header>
-<div class="logo"><span style="color:#fff">GIGOG</span><span class="r">FLIX</span><small>ULTRA PREMIUM</small></div>
-<nav><a class="active" href="#">Home</a><a href="#">Series</a><a href="#">Movies</a><a href="#">My List</a></nav>
-<div class="search"><input placeholder="Search movies, series, actors..."></div>
-</header>
-
-<div class="pills">
-<div class="pill active">Trending</div><div class="pill">Sci-Fi</div><div class="pill">Action</div><div class="pill">Drama</div><div class="pill">New Releases</div>
-</div>
-
-<div class="featured">
-<div class="f-left">
-<span class="badge">FEATURED • #1 IN TRENDING</span>
-<h1>DUNE: EMPIRE</h1>
-<p>Chapter II • Now Streaming in 4K HDR Dolby Atmos</p>
-<p style="margin-top:8px;color:#ccc;font-size:12px">The empire expands. Alliances fracture. The spice must flow.</p>
-<div class="btns"><button class="btn btn-play">▶ Play Trailer</button><button class="btn btn-list">+ My List</button></div>
-</div>
-<div class="f-right">
-<div style="padding:6px 10px;font-size:11px;display:flex;justify-content:space-between"><span>● Trailer Preview</span><span style="background:#ff2a6a;padding:2px 6px;border-radius:6px;font-size:9px">LIVE PREVIEW</span></div>
-<img src="https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg">
-<div style="padding:6px 10px;font-size:11px;display:flex;justify-content:space-between"><span>0:12 / 2:34</span><span>II</span></div>
-</div>
-</div>
-
-<div class="row">
-<h2>Trending Now ✨</h2>
-<div class="movies">
-<div class="card"><img src="https://image.tmdb.org/t/p/w300/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg"><div class="card-info"><h4>NOVA PROTOCOL</h4><span>2025 • Action • 4.6★</span></div></div>
-<div class="card"><img src="https://image.tmdb.org/t/p/w300/1E5baAaEse26fej7uHcjOgEE2t2.jpg"><div class="card-info"><h4>SHADOW STRIKE</h4><span>2024 • Thriller • 4.7★</span></div></div>
-<div class="card glow"><img src="https://image.tmdb.org/t/p/w300/d5NXSklXo0qyIYkgV94XAgMIckC.jpg"><div class="card-info"><h4>CYBER RIFT</h4><span>2025 • Sci-Fi • 4.9★</span><div style="font-size:10px;margin-top:4px">▶ Now Playing Trailer...</div></div></div>
-<div class="card"><img src="https://image.tmdb.org/t/p/w300/qW4crfED8mpNDadSmMdi7ZDzhXF.jpg"><div class="card-info"><h4>VOID HORIZON</h4><span>2024 • Sci-Fi • 4.5★</span></div></div>
-<div class="card"><img src="https://image.tmdb.org/t/p/w300/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg"><div class="card-info"><h4>IRON LEGACY</h4><span>2025 • Action • 4.4★</span></div></div>
-</div>
-</div>
-
-<div class="row"><h2>Sci-Fi Picks For You</h2>
-<div class="movies">
-<div class="card"><img src="https://image.tmdb.org/t/p/w300/74xTEgt7R36Fpooo50r9T25onhq.jpg"><div class="card-info"><h4>STELLAR DRIFT</h4><span>2024 • 4.8★</span></div></div>
-<div class="card"><img src="https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg"><div class="card-info"><h4>ECHO PROTOCOL</h4><span>2025 • 4.7★</span></div></div>
-<div class="card"><img src="https://image.tmdb.org/t/p/w300/fypydCipcWDKDTTCoP3R97AApdL.jpg"><div class="card-info"><h4>NULL SIGNAL</h4><span>2024 • 4.6★</span></div></div>
-<div class="card"><img src="https://image.tmdb.org/t/p/w300/gKkl1xYebWStq5cjUms1a6HCrqI.jpg"><div class="card-info"><h4>CHRONO VAULT</h4><span>2024 • 4.8★</span></div></div>
-</div></div>
-
-<div style="padding:20px;text-align:center;color:#666;font-size:11px">GIGOGFLIX • Ultra Premium • 4K • Offline Downloads • No Ads</div>
-</body>
- </html>
+.btn-play{padding:9px 18px;border-radius:11px;border:none;font-weight:800;font-size:12px;background:linear-gradient(90deg,#7af4ff
