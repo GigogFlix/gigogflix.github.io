@@ -3,32 +3,40 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>GIGOGFLIX - Nonton Gratis</title>
+<title>GIGOGFLIX</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#000;color:#fff;font-family:Arial,sans-serif}
-header{padding:15px 4%;display:flex;align-items:center;background:#000;position:sticky;top:0;z-index:10}
-.logo{font-family:Impact,Arial Black,sans-serif;font-weight:900;font-size:28px;letter-spacing:1px;cursor:pointer}
+body{background:#000;color:#fff;font-family:Arial}
+header{padding:12px 15px;display:flex;align-items:center;background:rgba(0,0,0,0.9);position:sticky;top:0;z-index:20}
+.logo{font-family:Impact,Arial Black,sans-serif;font-weight:900;font-size:22px;white-space:nowrap;letter-spacing:0.5px}
 .search-box{margin-left:auto}
-.search-box input{padding:8px 15px;border-radius:20px;border:none;background:#222;color:#fff;width:200px;outline:none}
-.hero{height:70vh;background:linear-gradient(to bottom,rgba(0,0,0,0.3),#000), url('https://image.tmdb.org/t/p/original/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg');background-size:cover;background-position:center;display:flex;align-items:flex-end;padding:4%}
-.hero h1{font-size:42px;margin-bottom:10px}
-.row{padding:20px 4%}
-.row h2{margin-bottom:15px;font-size:20px}
-.movies{display:flex;gap:10px;overflow-x:auto}
-.movie{min-width:160px;height:240px;background:#222;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#666;font-size:14px}
-.movie:hover{transform:scale(1.05);transition:0.3s;background:#333}
+.search-box input{padding:7px 12px;border-radius:20px;border:none;background:#222;color:#fff;width:130px;font-size:13px}
+.hero{height:65vh;background:linear-gradient(to bottom,rgba(0,0,0,0.2),#000), url('https://image.tmdb.org/t/p/original/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg');background-size:cover;background-position:center top;display:flex;align-items:flex-end;padding:20px 4%}
+.row{padding:15px 4%}
+.row h2{margin-bottom:12px;font-size:16px}
+.movies{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none}
+.movies::-webkit-scrollbar{display:none}
+.movie{min-width:120px;height:180px;border-radius:6px;background-size:cover;background-position:center;background-color:#222}
 </style>
 </head>
 <body>
 <header>
-<div class="logo"><span style="color:#ffffff">GIGOG</span><span style="color:#E50914;text-shadow:0 0 10px #E50914">FLIX</span></div>
-<div class="search-box"><input id="search" placeholder="Search movies..."></div>
+<div class="logo"><span style="color:#fff">GIGOG</span><span style="color:#E50914">FLIX</span></div>
+<div class="search-box"><input placeholder="Search..."></div>
 </header>
-<div class="hero">
-<div><h1>Welcome to GIGOGFLIX</h1><p>Streaming Mantap Mas - Nonton Film Terlengkap Gratis</p></div>
-</div>
-<div class="row"><h2>Trending Now</h2><div class="movies"><div class="movie">Film 1</div><div class="movie">Film 2</div><div class="movie">Film 3</div><div class="movie">Film 4</div><div class="movie">Film 5</div><div class="movie">Film 6</div></div></div>
-<div class="row"><h2>Top 10 Indonesia</h2><div class="movies"><div class="movie">Film 7</div><div class="movie">Film 8</div><div class="movie">Film 9</div><div class="movie">Film 10</div></div></div>
+<div class="hero"><div><h2>Welcome to GIGOGFLIX</h2><p style="font-size:12px;color:#ccc">Streaming Mantap Mas - Nonton Film Terlengkap Gratis</p></div></div>
+<div class="row"><h2>Trending Now</h2><div class="movies">
+<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/qW4crfED8mpNDadSmMdi7ZDzhXF.jpg')"></div>
+<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg')"></div>
+<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/1E5baAaEse26fej7uHcjOgEE2t2.jpg')"></div>
+<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/d5NXSklXo0qyIYkgV94XAgMIckC.jpg')"></div>
+<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg')"></div>
+</div></div>
+<div class="row"><h2>Top 10 Indonesia</h2><div class="movies">
+<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg')"></div>
+<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/qW4crfED8mpNDadSmMdi7ZDzhXF.jpg')"></div>
+<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/74xTEgt7R36Fpooo50r9T25onhq.jpg')"></div>
+<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg')"></div>
+</div></div>
 </body>
-  </html>
+</html>
