@@ -1,84 +1,71 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GIGOGFLIX</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GIGOGFLIX - Streaming Mantap</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#0f0f0f;color:#fff}
-header{position:fixed;top:0;width:100%;z-index:99;display:flex;justify-content:space-between;align-items:center;padding:14px 4%;background:#000}
-.logo{color:#e50914;font-weight:900;font-size:24px;cursor:pointer}
-nav{display:flex;gap:20px}nav a{color:#aaa;text-decoration:none;font-size:14px;cursor:pointer;font-weight:600}
-nav a.active{color:#fff;border-bottom:2px solid #e50914}
-.hero{height:85vh;background:linear-gradient(90deg,#0f0f0f 25%,transparent),url('https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=2000');background-size:cover;display:flex;align-items:center;padding:0 4%;margin-top:50px}
-.badge{background:#e50914;padding:4px 8px;border-radius:20px;font-size:10px;font-weight:800}
-.btn{padding:10px 20px;border-radius:5px;border:none;font-weight:700;margin-right:10px;margin-top:10px;cursor:pointer}
-.btn-play{background:#fff}.btn-info{background:rgba(109,109,110,0.7);color:#fff}
-.section{padding:20px 4%}
-.row{display:flex;gap:12px;overflow-x:auto} .row::-webkit-scrollbar{display:none}
-.card{min-width:160px;background:#1a1a1a;border-radius:8px;overflow:hidden;flex-shrink:0;cursor:pointer}
-.card img{width:100%;height:230px;object-fit:cover}
-.card-info{padding:8px;font-size:12px}
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:200;align-items:center;justify-content:center}
-.modal-box{background:#181818;padding:20px;border-radius:10px;max-width:400px;width:90%;text-align:center}
-.mobile-nav{display:none}
-@media(max-width:768px){nav{display:flex;gap:10px;font-size:12px}.hero{height:60vh}.mobile-nav{display:flex;position:fixed;bottom:0;width:100%;background:#000;justify-content:space-around;padding:10px 0;z-index:99} .mobile-nav div{font-size:11px;color:#777;text-align:center}.mobile-nav div.active{color:#e50914}}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;color:#fff;font-family:Arial,sans-serif}
+header{padding:12px 3%;display:flex;align-items:center;gap:20px;background:linear-gradient(to bottom,rgba(0,0,0,0.9),transparent);position:fixed;top:0;width:100%;z-index:100}
+.logo{font-family:Impact,Arial Black,sans-serif;font-weight:900;font-size:22px;white-space:nowrap}
+nav{display:flex;gap:18px}
+nav a{color:#ccc;text-decoration:none;font-size:14px}nav a:hover,nav a.active{color:#fff}
+.search-box{margin-left:auto}
+.search-box input{padding:7px 14px;border-radius:20px;border:none;background:rgba(50,50,50,0.8);color:#fff;width:160px;outline:none;font-size:13px}
+.hamburger{display:none;font-size:22px;cursor:pointer;margin-left:auto}
+.hero{height:85vh;background:linear-gradient(to bottom,rgba(0,0,0,0.2),#000), url('https://image.tmdb.org/t/p/original/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg');background-size:cover;background-position:center top;display:flex;align-items:flex-end;padding:5% 4%}
+.hero h1{font-size:38px;color:#E50914;letter-spacing:5px;font-weight:900}
+.hero p{max-width:500px;margin-top:10px;color:#ddd;font-size:14px;line-height:1.4}
+.row{padding:18px 4%}
+.row h2{font-size:16px;margin-bottom:12px}
+.movies{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none}
+.movies::-webkit-scrollbar{display:none}
+.movie{min-width:130px;height:195px;border-radius:8px;background-size:cover;background-position:center;cursor:pointer;transition:0.3s}
+.movie:hover{transform:scale(1.08)}
+footer{padding:30px 4%;color:#666;font-size:12px;text-align:center;border-top:1px solid #222;margin-top:20px}
+@media(max-width:768px){nav{display:none;position:fixed;top:50px;left:0;width:100%;background:#000;flex-direction:column;padding:20px;gap:15px}nav.show{display:flex}.hamburger{display:block}.search-box{display:none}.hero h1{font-size:28px}}
 </style>
 </head>
 <body>
 <header>
-<div class="logo" onclick="filterMenu('home')">GIGOGFLIX</div>
-<nav>
-<a id="m-home" class="active" onclick="filterMenu('home')">Home</a>
-<a id="m-series" onclick="filterMenu('series')">Series</a>
-<a id="m-movies" onclick="filterMenu('movies')">Movies</a>
-<a id="m-mylist" onclick="filterMenu('mylist')">My List (<span id="count">0</span>)</a>
+<div class="logo"><span style="color:#fff">GIGOG</span><span style="color:#E50914">FLIX</span></div>
+<nav id="nav">
+<a class="active" href="#">Home</a>
+<a href="#">Movies</a>
+<a href="#">TV Shows</a>
+<a href="#">Genre</a>
+<a href="#">Top IMDB</a>
 </nav>
-<div>🔍 🔔</div>
+<div class="search-box"><input id="search" placeholder="Search movies..."></div>
+<div class="hamburger" onclick="document.getElementById('nav').classList.toggle('show')">☰</div>
 </header>
 
-<section class="hero" id="heroSec">
-<div><span class="badge">FEATURED • NEW</span><h1 style="font-size:40px;margin:10px 0">DARK PROTOCOL</h1><p style="color:#ccc;font-size:14px">A rogue cyber-agent races to prevent a global blackout.</p><button class="btn btn-play" onclick="openModal('DARK PROTOCOL')">▶ Play</button><button class="btn btn-info" onclick="addToList('DARK PROTOCOL')">+ My List</button></div>
-</section>
-
-<div class="section"><h2 id="titleRow">Trending Now</h2><div class="row" id="row"></div></div>
-
-<div id="modal" class="modal" onclick="this.style.display='none'"><div class="modal-box"><h2 id="modalTitle">Playing</h2><p style="margin:10px 0;color:#aaa">Fitur video player mas segera hadir! Ini demo mas.</p><button class="btn btn-play" onclick="document.getElementById('modal').style.display='none'">Close</button></div></div>
-
-<div class="mobile-nav">
-<div class="active" onclick="filterMenu('home')">🏠<br>Home</div>
-<div onclick="filterMenu('series')">📺<br>Series</div>
-<div onclick="filterMenu('movies')">🎬<br>Movies</div>
-<div onclick="filterMenu('mylist')">❤️<br>My List</div>
+<div class="hero">
+<div>
+<h1>INCEPTION</h1>
+<p>Welcome to GIGOGFLIX - Streaming Mantap Mas! Nonton Film Terlengkap Gratis Sub Indo Kualitas HD Tanpa Iklan Mengganggu.</p>
+</div>
 </div>
 
+<div class="row"><h2>Trending Now</h2><div class="movies" id="trending">
+<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/uIpJPDNFoeX0TVml9smPrs9KUVx.jpg')"></div>
+<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg')"></div>
+<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/1E5baAaEse26fej7uHcjOgEE2t2.jpg')"></div>
+<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/d5NXSklXo0qyIYkgV94XAgMIckC.jpg')"></div>
+<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg')"></div>
+<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/qW4crfED8mpNDadSmMdi7ZDzhXF.jpg')"></div>
+</div></div>
+
+<div class="row"><h2>Top 10 Indonesia</h2><div class="movies">
+<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg')"></div>
+<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/74xTEgt7R36Fpooo50r9T25onhq.jpg')"></div>
+<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg')"></div>
+<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/fypydCipcWDKDTTCoP3R97AApdL.jpg')"></div>
+<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/gKkl1xYebWStq5cjUms1a6HCrqI.jpg')"></div>
+</div></div>
+
+<footer>GIGOGFLIX © 2026 - Streaming Mantap Mas</footer>
 <script>
-let myList=[];
-const allMovies=[
-{t:"DARK PROTOCOL",c:"movies",g:"Action 2024",i:"https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=400"},
-{t:"NEON HEIST",c:"movies",g:"Action 2024",i:"https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=400"},
-{t:"THE LAST WARDEN",c:"series",g:"Fantasy S1",i:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400"},
-{t:"MIDNIGHT RUN",c:"series",g:"Thriller S2",i:"https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=400"},
-{t:"GHOST PROTOCOL",c:"series",g:"Spy S1",i:"https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400"},
-{t:"WINTER BLADE",c:"movies",g:"Action 2024",i:"https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400"},
-{t:"BLACKOUT",c:"movies",g:"Sci-Fi 2024",i:"https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400"},
-{t:"VOID",c:"series",g:"Sci-Fi S1",i:"https://images.unsplash.com/photo-1446776877081-d282a0f896e2?w=400"}
-];
-function render(list){document.getElementById('row').innerHTML=list.map(m=>`<div class="card" onclick="openModal('${m.t}')"><img src="${m.i}"><div class="card-info"><b>${m.t}</b><br><span style="color:#999">${m.g}</span><br><span style="color:#e50914;font-size:10px;cursor:pointer" onclick="event.stopPropagation();addToList('${m.t}')">+ Add to My List</span></div></div>`).join('');}
-function filterMenu(type){
-document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
-let el=document.getElementById('m-'+type); if(el) el.classList.add('active');
-if(type==='home'){document.getElementById('titleRow').innerText='Trending Now - All'; render(allMovies); document.getElementById('heroSec').style.display='flex';}
-else if(type==='mylist'){document.getElementById('titleRow').innerText='My List ❤️'; document.getElementById('heroSec').style.display='none'; if(myList.length==0) document.getElementById('row').innerHTML='<p style="color:#777;padding:20px">Belum ada film di My List mas. Klik + Add to My List mas!</p>'; else render(myList);}
-else{document.getElementById('titleRow').innerText=type.toUpperCase(); document.getElementById('heroSec').style.display='none'; render(allMovies.filter(m=>m.c===type));}
-window.scrollTo({top:0,behavior:'smooth'});
-}
-function openModal(t){document.getElementById('modalTitle').innerText='▶ Playing: '+t; document.getElementById('modal').style.display='flex';}
-function addToList(title){
-let m=allMovies.find(x=>x.t===title); if(!m) m={t:title,c:"movies",g:"Saved",i:"https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=400"};
-if(!myList.find(x=>x.t===title)){myList.push(m); document.getElementById('count').innerText=myList.length; alert(title+' masuk My List mas! ❤️');} else alert('Udah ada di My List mas!');
-}
-render(allMovies);
-</script>
-</body>
-</html>
+document.getElementById('search').addEventListener('input',function(e){
+ let v=e.target.value.toLowerCase(); document.querySelectorAll('.movie').for
