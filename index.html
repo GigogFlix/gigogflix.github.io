@@ -8,57 +8,35 @@
 body{background:#0a0a12;color:#fff;padding-bottom:80px}
 .header{display:flex;justify-content:space-between;align-items:center;padding:12px 15px;background:#15151f;border-radius:15px;margin:10px}
 .logo{font-weight:900;font-size:20px;line-height:18px;background:linear-gradient(90deg,#6cf2ff,#ff8ad8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.header span{font-size:10px;color:#aaa}
-.icons{display:flex;gap:8px}
-.icon{width:38px;height:38px;background:#2a2a3a;border-radius:50%;display:flex;align-items:center;justify-content:center}
-.hero{margin:10px;border-radius:20px;overflow:hidden;position:relative;height:380px}
-.hero img{width:100%;height:100%;object-fit:cover}
-.hero-top{position:absolute;top:15px;left:15px;font-weight:900}
-.hero-card{position:absolute;bottom:15px;left:10px;right:10px;background:rgba(30,30,40,0.85);backdrop-filter:blur(10px);border-radius:20px;padding:15px}
-.btn-row{display:flex;gap:10px;margin-top:10px}
-.btn{flex:1;padding:12px;border-radius:15px;border:none;font-weight:bold}
-.btn-play{background:linear-gradient(90deg,#8df0ff,#ff8ed8);color:#000}
-.btn-list{background:#3a3a4a;color:#fff}
-.section{padding:15px;display:flex;justify-content:space-between;align-items:center}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 10px}
-.card{border-radius:18px;overflow:hidden;position:relative;height:210px;background:#222}
-.card img{width:100%;height:100%;object-fit:cover}
-.card-title{position:absolute;bottom:0;width:100%;background:linear-gradient(transparent,rgba(0,0,0,0.9));padding:40px 10px 12px;text-align:center;font-weight:800;font-size:13px}
-.card-title small{color:#5ee7ff}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:rgba(20,20,30,0.95);backdrop-filter:blur(10px);display:flex;justify-content:space-around;padding:10px 0;border-radius:20px 20px 0 0}
-.b-item{text-align:center;font-size:11px;color:#888}
-.b-item.active{color:#5ee7ff}
+.icons{display:flex;gap:8px}.icon{width:38px;height:38px;background:#2a2a3a;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.hero{margin:10px;border-radius:20px;overflow:hidden;position:relative;height:380px}.hero img{width:100%;height:100%;object-fit:cover}
+.hero-top{position:absolute;top:15px;left:15px;font-weight:900}.hero-card{position:absolute;bottom:15px;left:10px;right:10px;background:rgba(30,30,40,0.85);backdrop-filter:blur(10px);border-radius:20px;padding:15px}
+.btn-row{display:flex;gap:10px;margin-top:10px}.btn{flex:1;padding:12px;border-radius:15px;border:none;font-weight:bold}.btn-play{background:linear-gradient(90deg,#8df0ff,#ff8ed8);color:#000}.btn-list{background:#3a3a4a;color:#fff}
+.section{padding:15px;display:flex;justify-content:space-between;align-items:center}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 10px}
+.card{border-radius:18px;overflow:hidden;position:relative;height:210px;background:#222;cursor:pointer}.card img{width:100%;height:100%;object-fit:cover}
+.card-title{position:absolute;bottom:0;width:100%;background:linear-gradient(transparent,rgba(0,0,0,0.9));padding:40px 10px 12px;text-align:center;font-weight:800;font-size:13px}.card-title small{color:#5ee7ff}
+#player{position:fixed;top:0;left:0;right:0;bottom:0;background:#000;z-index:9999;display:none;flex-direction:column}
+#player iframe{width:100%;height:100%;border:none}
+.close{padding:15px;background:#15151f;color:#fff;border:none;font-size:16px;text-align:left}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:rgba(20,20,30,0.95);backdrop-filter:blur(10px);display:flex;justify-content:space-around;padding:10px 0;border-radius:20px 20px 0 0}.b-item{text-align:center;font-size:11px;color:#888}.b-item.active{color:#5ee7ff}
 </style>
 </head>
 <body>
-<div class="header">
-<div class="logo">GIGOGFLIX<br>ULTRA PREMIUM</div>
-<div class="icons"><div class="icon">🔍</div><div class="icon">🔔</div><div class="icon">👤</div></div>
-</div>
-<div class="hero">
-<img src="https://images.unsplash.com/photo-1494783367193-149034c05e8f?w=800">
-<div class="hero-top">DUNE EMPIRE</div>
-<div class="hero-card">
-<h2>DUNE EMPIRE</h2>
-<p style="font-size:11px;color:#aaa">House of Spice • Now Streaming • 2024 • Sci-Fi • 2h 34m</p>
-<div class="btn-row"><button class="btn btn-play">▶ Play</button><button class="btn btn-list">+ My List</button></div>
-</div>
-</div>
+<div class="header"><div class="logo">GIGOGFLIX<br>ULTRA PREMIUM</div><div class="icons"><div class="icon">🔍</div><div class="icon">🔔</div><div class="icon">👤</div></div></div>
+<div class="hero"><img src="https://images.unsplash.com/photo-1494783367193-149034c05e8f?w=800"><div class="hero-top">DUNE EMPIRE</div><div class="hero-card"><h2>DUNE EMPIRE</h2><p style="font-size:11px;color:#aaa">House of Spice • Now Streaming</p><div class="btn-row"><button class="btn btn-play">▶ Play</button><button class="btn btn-list">+ My List</button></div></div></div>
 <div class="section"><h3>Trending Now</h3><span style="color:#5ee7ff;font-size:13px">See all ></span></div>
 <div class="grid">
-<!-- FILM BARU MAS DI SINI MAS - TINGGAL DUPLIKAT INI MAS BUAT FILM BARU -->
-<div class="card">
-<img src="film-agent-kim-reactivated-2026-lk21.jpg.webp">
-<div class="card-title">AGENT KIM<br><small>Action • 2026</small></div>
-</div>
-<!-- AKHIR FILM BARU -->
+<div class="card" onclick="playFilm('1N2qr230u2XFyHHkKAlumamjoyFMLLtdm')"><img src="film-agent-kim-reactivated-2026-lk21.jpg.webp" onerror="this.src='https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400'"><div class="card-title">AGENT KIM<br><small>Action • 2026</small></div></div>
 <div class="card"><img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=400"><div class="card-title">NEBULA RUNNER<br><small>Action • 2024</small></div></div>
 <div class="card"><img src="https://images.unsplash.com/photo-1519120944692-1a8d8cfc107f?w=400"><div class="card-title">VOID PROTOCOL<br><small>Thriller • 2024</small></div></div>
 <div class="card"><img src="https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?w=400"><div class="card-title">SANDWRAITH<br><small>Drama • 2024</small></div></div>
 <div class="card"><img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?w=400"><div class="card-title">ORBIT<br><small>Sci-Fi • 2024</small></div></div>
 </div>
-<div class="bottom">
-<div class="b-item active">🏠<br>Home</div><div class="b-item">🔍<br>Search</div><div class="b-item">⬇️<br>Downloads</div><div class="b-item">🔥<br>New & Hot</div><div class="b-item">👤<br>Profile</div>
-</div>
+<div id="player"><button class="close" onclick="closePlayer()">✕ Tutup • AGENT KIM REACTIVATED (2026)</button><iframe id="filmFrame" allowfullscreen allow="autoplay"></iframe></div>
+<div class="bottom"><div class="b-item active">🏠<br>Home</div><div class="b-item">🔍<br>Search</div><div class="b-item">⬇️<br>Downloads</div><div class="b-item">🔥<br>New & Hot</div><div class="b-item">👤<br>Profile</div></div>
+<script>
+function playFilm(id){document.getElementById('filmFrame').src='https://drive.google.com/file/d/'+id+'/preview';document.getElementById('player').style.display='flex';}
+function closePlayer(){document.getElementById('player').style.display='none';document.getElementById('filmFrame').src='';}
+</script>
 </body>
-</html>
+  </html>
