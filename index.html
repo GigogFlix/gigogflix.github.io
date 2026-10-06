@@ -1,71 +1,93 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>GIGOGFLIX - Streaming Mantap</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GIGOGFLIX - Ultra Premium</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#000;color:#fff;font-family:Arial,sans-serif}
-header{padding:12px 3%;display:flex;align-items:center;gap:20px;background:linear-gradient(to bottom,rgba(0,0,0,0.9),transparent);position:fixed;top:0;width:100%;z-index:100}
-.logo{font-family:Impact,Arial Black,sans-serif;font-weight:900;font-size:22px;white-space:nowrap}
-nav{display:flex;gap:18px}
-nav a{color:#ccc;text-decoration:none;font-size:14px}nav a:hover,nav a.active{color:#fff}
-.search-box{margin-left:auto}
-.search-box input{padding:7px 14px;border-radius:20px;border:none;background:rgba(50,50,50,0.8);color:#fff;width:160px;outline:none;font-size:13px}
-.hamburger{display:none;font-size:22px;cursor:pointer;margin-left:auto}
-.hero{height:85vh;background:linear-gradient(to bottom,rgba(0,0,0,0.2),#000), url('https://image.tmdb.org/t/p/original/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg');background-size:cover;background-position:center top;display:flex;align-items:flex-end;padding:5% 4%}
-.hero h1{font-size:38px;color:#E50914;letter-spacing:5px;font-weight:900}
-.hero p{max-width:500px;margin-top:10px;color:#ddd;font-size:14px;line-height:1.4}
-.row{padding:18px 4%}
-.row h2{font-size:16px;margin-bottom:12px}
-.movies{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none}
+body{background:#060512;color:#fff;font-family:Inter,Arial,sans-serif;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(800px 400px at 20% 10%,#2a1a6a 0%,transparent 60%),radial-gradient(600px 400px at 90% 40%,#5a1a4a 0%,transparent 60%),#060512;z-index:-1}
+header{margin:12px 1.5%;padding:10px 18px;border-radius:18px;background:rgba(255,255,255,0.12);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;gap:25px;position:sticky;top:12px;z-index:100}
+.logo{font-weight:900;font-size:22px;letter-spacing:1px;line-height:1}
+.logo small{display:block;font-size:9px;letter-spacing:3px;color:#d4b36a;font-weight:600}
+.logo span.r{color:#ff1a4a;text-shadow:0 0 10px rgba(255,0,60,0.6)}
+nav{display:flex;gap:22px}
+nav a{color:#bbb;text-decoration:none;font-size:14px}nav a.active{color:#fff;border-bottom:2px solid #7af4ff;padding-bottom:3px}
+.search{margin-left:auto;display:flex;align-items:center;gap:12px;position:relative}
+.search input{width:280px;padding:10px 14px 10px 36px;border-radius:12px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.15);color:#fff;outline:none}
+.search::before{content:"🔍";position:absolute;left:12px;opacity:0.6}
+.pills{padding:18px 2%;display:flex;gap:10px;flex-wrap:wrap}
+.pill{padding:8px 16px;border-radius:20px;background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.2);font-size:13px;backdrop-filter:blur(10px);cursor:pointer}
+.pill.active{background:linear-gradient(90deg,#a8f0ff,#ffb3d1);color:#000;font-weight:700}
+.featured{margin:10px 2%;padding:18px;border-radius:20px;background:rgba(255,255,255,0.14);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.18);display:flex;gap:18px;align-items:center}
+.f-left{flex:1}
+.badge{font-size:10px;padding:4px 8px;border-radius:8px;background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3)}
+.f-left h1{font-size:36px;margin:10px 0 4px;letter-spacing:1px;text-shadow:0 0 20px rgba(255,255,255,0.6)}
+.f-left p{font-size:13px;color:#ddd}
+.btns{margin-top:14px;display:flex;gap:10px}
+.btn{padding:10px 18px;border-radius:12px;border:none;cursor:pointer;font-weight:700}
+.btn-play{background:linear-gradient(90deg,#7af4ff,#d4b3ff);color:#000}
+.btn-list{background:rgba(255,255,255,0.2);color:#fff;border:1px solid rgba(255,255,255,0.3)}
+.f-right{width:300px;border-radius:14px;overflow:hidden;background:#000;border:1px solid rgba(255,255,255,0.2)}
+.f-right img{width:100%;height:140px;object-fit:cover;display:block}
+.row{padding:18px 2%}
+.row h2{font-size:18px;margin-bottom:12px}
+.movies{display:flex;gap:14px;overflow-x:auto;scrollbar-width:none}
 .movies::-webkit-scrollbar{display:none}
-.movie{min-width:130px;height:195px;border-radius:8px;background-size:cover;background-position:center;cursor:pointer;transition:0.3s}
-.movie:hover{transform:scale(1.08)}
-footer{padding:30px 4%;color:#666;font-size:12px;text-align:center;border-top:1px solid #222;margin-top:20px}
-@media(max-width:768px){nav{display:none;position:fixed;top:50px;left:0;width:100%;background:#000;flex-direction:column;padding:20px;gap:15px}nav.show{display:flex}.hamburger{display:block}.search-box{display:none}.hero h1{font-size:28px}}
+.card{min-width:185px;width:185px;border-radius:16px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.15);backdrop-filter:blur(12px);overflow:hidden;cursor:pointer;transition:0.3s}
+.card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 10px 30px rgba(124,244,255,0.3)}
+.card img{width:100%;height:175px;object-fit:cover}
+.card-info{padding:10px}
+.card-info h4{font-size:13px}.card-info span{font-size:11px;color:#bbb}
+.glow{box-shadow:0 0 0 1px #7af4ff,0 0 20px rgba(124,244,255,0.6)}
+@media(max-width:768px){nav{display:none}.search input{width:160px}.featured{flex-direction:column}.f-right{width:100%}}
 </style>
 </head>
 <body>
 <header>
-<div class="logo"><span style="color:#fff">GIGOG</span><span style="color:#E50914">FLIX</span></div>
-<nav id="nav">
-<a class="active" href="#">Home</a>
-<a href="#">Movies</a>
-<a href="#">TV Shows</a>
-<a href="#">Genre</a>
-<a href="#">Top IMDB</a>
-</nav>
-<div class="search-box"><input id="search" placeholder="Search movies..."></div>
-<div class="hamburger" onclick="document.getElementById('nav').classList.toggle('show')">☰</div>
+<div class="logo"><span style="color:#fff">GIGOG</span><span class="r">FLIX</span><small>ULTRA PREMIUM</small></div>
+<nav><a class="active" href="#">Home</a><a href="#">Series</a><a href="#">Movies</a><a href="#">My List</a></nav>
+<div class="search"><input placeholder="Search movies, series, actors..."></div>
 </header>
 
-<div class="hero">
-<div>
-<h1>INCEPTION</h1>
-<p>Welcome to GIGOGFLIX - Streaming Mantap Mas! Nonton Film Terlengkap Gratis Sub Indo Kualitas HD Tanpa Iklan Mengganggu.</p>
+<div class="pills">
+<div class="pill active">Trending</div><div class="pill">Sci-Fi</div><div class="pill">Action</div><div class="pill">Drama</div><div class="pill">New Releases</div>
+</div>
+
+<div class="featured">
+<div class="f-left">
+<span class="badge">FEATURED • #1 IN TRENDING</span>
+<h1>DUNE: EMPIRE</h1>
+<p>Chapter II • Now Streaming in 4K HDR Dolby Atmos</p>
+<p style="margin-top:8px;color:#ccc;font-size:12px">The empire expands. Alliances fracture. The spice must flow.</p>
+<div class="btns"><button class="btn btn-play">▶ Play Trailer</button><button class="btn btn-list">+ My List</button></div>
+</div>
+<div class="f-right">
+<div style="padding:6px 10px;font-size:11px;display:flex;justify-content:space-between"><span>● Trailer Preview</span><span style="background:#ff2a6a;padding:2px 6px;border-radius:6px;font-size:9px">LIVE PREVIEW</span></div>
+<img src="https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg">
+<div style="padding:6px 10px;font-size:11px;display:flex;justify-content:space-between"><span>0:12 / 2:34</span><span>II</span></div>
 </div>
 </div>
 
-<div class="row"><h2>Trending Now</h2><div class="movies" id="trending">
-<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/uIpJPDNFoeX0TVml9smPrs9KUVx.jpg')"></div>
-<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg')"></div>
-<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/1E5baAaEse26fej7uHcjOgEE2t2.jpg')"></div>
-<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/d5NXSklXo0qyIYkgV94XAgMIckC.jpg')"></div>
-<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg')"></div>
-<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/qW4crfED8mpNDadSmMdi7ZDzhXF.jpg')"></div>
+<div class="row">
+<h2>Trending Now ✨</h2>
+<div class="movies">
+<div class="card"><img src="https://image.tmdb.org/t/p/w300/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg"><div class="card-info"><h4>NOVA PROTOCOL</h4><span>2025 • Action • 4.6★</span></div></div>
+<div class="card"><img src="https://image.tmdb.org/t/p/w300/1E5baAaEse26fej7uHcjOgEE2t2.jpg"><div class="card-info"><h4>SHADOW STRIKE</h4><span>2024 • Thriller • 4.7★</span></div></div>
+<div class="card glow"><img src="https://image.tmdb.org/t/p/w300/d5NXSklXo0qyIYkgV94XAgMIckC.jpg"><div class="card-info"><h4>CYBER RIFT</h4><span>2025 • Sci-Fi • 4.9★</span><div style="font-size:10px;margin-top:4px">▶ Now Playing Trailer...</div></div></div>
+<div class="card"><img src="https://image.tmdb.org/t/p/w300/qW4crfED8mpNDadSmMdi7ZDzhXF.jpg"><div class="card-info"><h4>VOID HORIZON</h4><span>2024 • Sci-Fi • 4.5★</span></div></div>
+<div class="card"><img src="https://image.tmdb.org/t/p/w300/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg"><div class="card-info"><h4>IRON LEGACY</h4><span>2025 • Action • 4.4★</span></div></div>
+</div>
+</div>
+
+<div class="row"><h2>Sci-Fi Picks For You</h2>
+<div class="movies">
+<div class="card"><img src="https://image.tmdb.org/t/p/w300/74xTEgt7R36Fpooo50r9T25onhq.jpg"><div class="card-info"><h4>STELLAR DRIFT</h4><span>2024 • 4.8★</span></div></div>
+<div class="card"><img src="https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg"><div class="card-info"><h4>ECHO PROTOCOL</h4><span>2025 • 4.7★</span></div></div>
+<div class="card"><img src="https://image.tmdb.org/t/p/w300/fypydCipcWDKDTTCoP3R97AApdL.jpg"><div class="card-info"><h4>NULL SIGNAL</h4><span>2024 • 4.6★</span></div></div>
+<div class="card"><img src="https://image.tmdb.org/t/p/w300/gKkl1xYebWStq5cjUms1a6HCrqI.jpg"><div class="card-info"><h4>CHRONO VAULT</h4><span>2024 • 4.8★</span></div></div>
 </div></div>
 
-<div class="row"><h2>Top 10 Indonesia</h2><div class="movies">
-<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg')"></div>
-<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/74xTEgt7R36Fpooo50r9T25onhq.jpg')"></div>
-<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg')"></div>
-<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/fypydCipcWDKDTTCoP3R97AApdL.jpg')"></div>
-<div class="movie" style="background-image:url('https://image.tmdb.org/t/p/w300/gKkl1xYebWStq5cjUms1a6HCrqI.jpg')"></div>
-</div></div>
-
-<footer>GIGOGFLIX © 2026 - Streaming Mantap Mas</footer>
-<script>
-document.getElementById('search').addEventListener('input',function(e){
- let v=e.target.value.toLowerCase(); document.querySelectorAll('.movie').for
+<div style="padding:20px;text-align:center;color:#666;font-size:11px">GIGOGFLIX • Ultra Premium • 4K • Offline Downloads • No Ads</div>
+</body>
+ </html>
