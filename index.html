@@ -1,19 +1,22 @@
 <!DOCTYPE html>
-<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>GIGOGFLIX</title>
-<style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}body{background:#0f0f0f;color:#fff}header{position:fixed;top:0;width:100%;z-index:99;display:flex;justify-content:space-between;align-items:center;padding:12px 3%;background:#000;gap:8px}.logo{font-weight:900;font-size:26px;letter-spacing:2px;font-family:Impact,Arial Black}.search-box{display:flex;align-items:center;background:#222;border-radius:20px;padding:6px 12px;border:1px solid #333}.search-box input{background:transparent;border:none;color:#fff;outline:none;width:110px;font-size:13px}nav{display:flex;gap:12px}nav a{color:#aaa;font-size:13px;cursor:pointer;font-weight:600}nav a.active{color:#fff;border-bottom:2px solid #e50914}.hero{height:80vh;background:linear-gradient(90deg,#0f0f0f 20%,rgba(0,0,0,0.2)),url('https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=2000');background-size:cover;display:flex;align-items:center;padding:0 4%;margin-top:50px}.section{padding:20px 3%}.row{display:flex;gap:12px;overflow-x:auto}.row::-webkit-scrollbar{display:none}.card{min-width:150px;max-width:150px;background:#1a1a1a;border-radius:8px;overflow:hidden;flex-shrink:0}.card img{width:100%;height:210px;object-fit:cover}.card-info{padding:8px;font-size:12px}</style>
-</head><body>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GIGOGFLIX</title>
+<style>
+body{background:#000;color:#fff;margin:0;font-family:Arial,sans-serif}
+header{padding:15px 20px;display:flex;align-items:center;background:#000;border-bottom:1px solid #222}
+.logo{font-family:Impact,Arial Black,sans-serif;font-weight:900;font-size:32px;letter-spacing:1px}
+.search-box{margin-left:auto}
+.search-box input{padding:8px 15px;border-radius:20px;border:none;background:#222;color:#fff;width:150px}
+</style>
+</head>
+<body>
 <header>
-<div class="logo"><span style="color:#fff">GIGOG</span><span style="color:#e50914;text-shadow:0 0 10px #e50914,0 0 20px red">FLIX</span></div>
-<div class="search-box"><input id="searchInput" placeholder="Cari film..." onkeyup="searchFilm()"><span>🔍</span></div>
-<nav><a id="m-home" class="active" onclick="filterMenu('home')">Home</a><a onclick="filterMenu('series')">Series</a><a onclick="filterMenu('movies')">Movies</a><a onclick="filterMenu('mylist')">List(<span id="count">0</span>)</a></nav>
+<div class="logo"><span style="color:#ffffff">GIGOG</span><span style="color:#E50914;text-shadow:0 0 10px #E50914">FLIX</span></div>
+<div class="search-box"><input placeholder="Search..."></div>
 </header>
-<section class="hero" id="heroSec"><div><span style="background:#e50914;padding:5px 10px;border-radius:20px;font-size:10px">FEATURED</span><h1 style="font-size:36px;margin:10px 0">DARK PROTOCOL</h1><p style="color:#ccc;font-size:13px">A rogue cyber-agent races to prevent blackout.</p></div></section>
-<div class="section"><h2 id="titleRow" style="margin-bottom:12px">Trending Now</h2><div class="row" id="row"></div><p id="noResult" style="display:none;color:#777;padding:20px">Tidak ditemukan mas!</p></div>
-<script>
-let myList=[];const allMovies=[{t:"DARK PROTOCOL",c:"movies",i:"https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=400"},{t:"NEON HEIST",c:"movies",i:"https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=400"},{t:"BLACKOUT",c:"movies",i:"https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400"},{t:"VOID",c:"series",i:"https://images.unsplash.com/photo-1446776877081-d282a0f896e2?w=400"},{t:"AVENGERS ENDGAME",c:"movies",i:"https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg"},{t:"THE BATMAN",c:"movies",i:"https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg"},{t:"JOHN WICK 4",c:"movies",i:"https://image.tmdb.org/t/p/w500/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg"}];
-function render(list){let r=document.getElementById('row');let nr=document.getElementById('noResult');if(list.length==0){r.innerHTML='';nr.style.display='block';return;}nr.style.display='none';r.innerHTML=list.map(m=>`<div class="card"><img src="${m.i}"><div class="card-info"><b>${m.t}</b><br><span style="color:#e50914;font-size:10px" onclick="addToList('${m.t}')">+ List</span></div></div>`).join('');}
-function searchFilm(){let q=document.getElementById('searchInput').value.toLowerCase();let f=allMovies.filter(m=>m.t.toLowerCase().includes(q));document.getElementById('titleRow').innerText=q?`Hasil: "${q}"`:'Trending Now';document.getElementById('heroSec').style.display=q?'none':'flex';render(f);}
-function filterMenu(type){document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));if(type=='home'){render(allMovies);document.getElementById('heroSec').style.display='flex';}else if(type=='mylist'){document.getElementById('heroSec').style.display='none';if(myList.length==0)document.getElementById('row').innerHTML='<p style=color:#777>Belum ada mas</p>';else render(myList);}else{render(allMovies.filter(m=>m.c==type));document.getElementById('heroSec').style.display='none';}}
-function addToList(t){let m=allMovies.find(x=>x.t==t);if(!myList.find(x=>x.t==t)){myList.push(m);document.getElementById('count').innerText=myList.length;alert(t+' masuk List!');}}
-render(allMovies);
-</script></body></html>
+<div style="padding:20px;text-align:center;color:#666;margin-top:50px">Welcome to GIGOGFLIX - Streaming Mantap Mas!</div>
+</body>
+</html>
