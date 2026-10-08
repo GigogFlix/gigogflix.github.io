@@ -1,45 +1,73 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GIGOGFLIX ULTRA PREMIUM</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#0a0a12;color:#fff;padding-bottom:80px}
-.header{display:flex;justify-content:space-between;align-items:center;padding:12px 15px;background:#15151f;border-radius:15px;margin:10px}
-.logo{font-weight:900;font-size:20px;line-height:18px;background:linear-gradient(90deg,#6cf2ff,#ff8ad8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.icons{display:flex;gap:8px}.icon{width:38px;height:38px;background:#2a2a3a;border-radius:50%;display:flex;align-items:center;justify-content:center}
-.hero{margin:10px;border-radius:20px;overflow:hidden;position:relative;height:380px}.hero img{width:100%;height:100%;object-fit:cover}
-.hero-top{position:absolute;top:15px;left:15px;font-weight:900}.hero-card{position:absolute;bottom:15px;left:10px;right:10px;background:rgba(30,30,40,0.85);backdrop-filter:blur(10px);border-radius:20px;padding:15px}
-.btn-row{display:flex;gap:10px;margin-top:10px}.btn{flex:1;padding:12px;border-radius:15px;border:none;font-weight:bold}.btn-play{background:linear-gradient(90deg,#8df0ff,#ff8ed8);color:#000}.btn-list{background:#3a3a4a;color:#fff}
-.section{padding:15px;display:flex;justify-content:space-between;align-items:center}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 10px}
-.card{border-radius:18px;overflow:hidden;position:relative;height:210px;background:#222;cursor:pointer}.card img{width:100%;height:100%;object-fit:cover}
-.card-title{position:absolute;bottom:0;width:100%;background:linear-gradient(transparent,rgba(0,0,0,0.9));padding:40px 10px 12px;text-align:center;font-weight:800;font-size:13px}.card-title small{color:#5ee7ff}
-#player{position:fixed;top:0;left:0;right:0;bottom:0;background:#000;z-index:9999;display:none;flex-direction:column}
-.p-top{height:70px;background:#000;display:flex;align-items:center;padding:0 15px;gap:12px;z-index:3}
-.back{width:36px;height:36px;background:rgba(255,255,255,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;border:none;color:#fff;font-size:18px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a12;color:#fff;padding-bottom:80px;font-family:sans-serif}
+.header{display:flex;justify-content:space-between;align-items:center;padding:15px}
+.logo{font-weight:900;font-size:20px;line-height:1}
+.icons{display:flex;gap:8px}.icon{width:36px;height:36px;background:#1a1a2a;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.hero{margin:10px;border-radius:20px;overflow:hidden;position:relative;height:420px;background:#000}
+.hero img{width:100%;height:100%;object-fit:cover}
+.btn-row{display:flex;gap:10px;margin-top:15px;position:absolute;bottom:20px;left:15px;right:15px;z-index:2}
+.btn-row button{flex:1;padding:12px;border-radius:12px;border:none;font-weight:700;cursor:pointer}
+.section{padding:15px;display:flex;justify-content:space-between;align-items:center}
+.card{border-radius:18px;overflow:hidden;position:relative;height:180px;background:#1a1a2a;cursor:pointer}
+.card img{width:100%;height:100%;object-fit:cover}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 15px}
+#player{position:fixed;top:0;left:0;right:0;bottom:0;background:#000;z-index:999;display:none;flex-direction:column}
+#player.show{display:flex}
+.p-top{height:70px;background:#000;display:flex;align-items:center;padding:0 15px;gap:10px}
+.back{width:36px;height:36px;background:#222;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer}
 .video-wrap{flex:1;background:#000;position:relative}
 .video-wrap iframe{width:100%;height:100%;border:none}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:rgba(20,20,30,0.95);backdrop-filter:blur(10px);display:flex;justify-content:space-around;padding:10px 0;border-radius:20px 20px 0 0}.b-item{text-align:center;font-size:11px;color:#888}.b-item.active{color:#5ee7ff}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#0f0f1a;border-top:1px solid #222;display:flex;justify-content:space-around;padding:10px 0;z-index:50}
+.b-item{display:flex;flex-direction:column;align-items:center;font-size:10px;gap:4px;color:#888;cursor:pointer}
+.b-item.active{color:#6cf}
+#toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:#fff;color:#000;padding:10px 18px;border-radius:20px;font-weight:700;font-size:13px;z-index:1000;display:none}
 </style>
 </head>
 <body>
-<div class="header"><div class="logo">GIGOGFLIX<br>ULTRA PREMIUM</div><div class="icons"><div class="icon">🔍</div><div class="icon">🔔</div><div class="icon">👤</div></div></div>
-<div class="hero"><img src="https://images.unsplash.com/photo-1494783367193-149034c05e8f?w=800"><div class="hero-top">DUNE EMPIRE</div><div class="hero-card"><h2>DUNE EMPIRE</h2><p style="font-size:11px;color:#aaa">House of Spice • Now Streaming</p><div class="btn-row"><button class="btn btn-play">▶ Play</button><button class="btn btn-list">+ My List</button></div></div></div>
-<div class="section"><h3>Trending Now</h3><span style="color:#5ee7ff;font-size:13px">See all ></span></div>
-<div class="grid">
-<div class="card" onclick="playFilm()"><img src="film-agent-kim-reactivated-2026-lk21.jpg.webp"><div class="card-title">AGENT KIM<br><small>Action • 2026 • TAP TO PLAY</small></div></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=400"><div class="card-title">NEBULA RUNNER<br><small>Action • 2024</small></div></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1519120944692-1a8d8cfc107f?w=400"><div class="card-title">VOID PROTOCOL<br><small>Thriller • 2024</small></div></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?w=400"><div class="card-title">SANDWRAITH<br><small>Drama • 2024</small></div></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?w=400"><div class="card-title">ORBIT<br><small>Sci-Fi • 2024</small></div></div>
+<div class="header">
+  <div class="logo">GIGOGFLIX<br><span style="font-size:12px;color:#a78bfa">ULTRA PREMIUM</span></div>
+  <div class="icons">
+    <div class="icon" onclick="showToast('Search dibuka')">🔍</div>
+    <div class="icon" onclick="showToast('Notifikasi: 3 baru')">🔔</div>
+    <div class="icon" onclick="showToast('Profile Ultra Premium ✓')">👤</div>
+  </div>
 </div>
-<div id="player"><div class="p-top"><button class="back" onclick="closePlayer()">✕</button><div><b>AGENT KIM: REACTIVATED</b><br><small style="color:#5ee7ff">● Now Playing • Ultra HD • GIGOGFLIX Original</small></div></div><div class="video-wrap"><iframe id="filmFrame" allowfullscreen allow="autoplay"></iframe></div></div>
-<div class="bottom"><div class="b-item active">🏠<br>Home</div><div class="b-item">🔍<br>Search</div><div class="b-item">⬇️<br>Downloads</div><div class="b-item">🔥<br>New & Hot</div><div class="b-item">👤<br>Profile</div></div>
+<div class="hero" onclick="playFilm()">
+  <img src="https://images.unsplash.com/photo-1494783367193-149034c05e8f?q=80&w=800">
+  <div class="btn-row">
+    <button onclick="event.stopPropagation();playFilm()" style="background:#fff;color:#000">▶ Play</button>
+    <button onclick="event.stopPropagation();showToast('Ditambahkan ke My List ✓')" style="background:rgba(255,255,255,.2);color:#fff">+ My List</button>
+  </div>
+</div>
+<div class="section"><h3>Trending Now</h3><span onclick="showToast('Buka semua Trending Now →')" style="color:#6cf;font-size:13px;cursor:pointer">See all ></span></div>
+<div class="grid">
+  <div class="card" onclick="playFilm()"><img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=400"></div>
+  <div class="card" onclick="playFilm()"><img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?q=80&w=400"></div>
+  <div class="card" onclick="playFilm()"><img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=400"></div>
+  <div class="card" onclick="playFilm()"><img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=400"></div>
+  <div class="card" onclick="playFilm()"><img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?q=80&w=400"></div>
+</div>
+<div id="player"><div class="p-top"><div class="back" onclick="closePlayer()">✕</div><div>Now Playing</div></div><div class="video-wrap"><iframe id="filmFrame" src="" allowfullscreen></iframe></div></div>
+<div class="bottom">
+  <div class="b-item active" onclick="navClick(this,'Home')">🏠<br>Home</div>
+  <div class="b-item" onclick="navClick(this,'Search')">🔍<br>Search</div>
+  <div class="b-item" onclick="navClick(this,'Downloads')">⬇️<br>Downloads</div>
+  <div class="b-item" onclick="navClick(this,'New & Hot')">🔥<br>New & Hot</div>
+  <div class="b-item" onclick="navClick(this,'Profile')">👤<br>Profile</div>
+</div>
+<div id="toast"></div>
 <script>
-const filmId='1N2qr230u2XFyHHkKAlumamjoyFMLLtdm';
-function playFilm(){document.getElementById('filmFrame').src='https://drive.google.com/file/d/'+filmId+'/preview';document.getElementById('player').style.display='flex';}
-function closePlayer(){document.getElementById('player').style.display='none';document.getElementById('filmFrame').src='';}
+const filmId='1N2qr230u2XFyHHkKAlumamjoyFqYhWvE9vVvL8XwJzQ';
+function playFilm(){document.getElementById('filmFrame').src='https://drive.google.com/file/d/'+filmId+'/preview';document.getElementById('player').classList.add('show');}
+function closePlayer(){document.getElementById('player').classList.remove('show');document.getElementById('filmFrame').src='';}
+function showToast(t){let x=document.getElementById('toast');x.innerText=t;x.style.display='block';setTimeout(()=>x.style.display='none',2000);}
+function navClick(el,name){document.querySelectorAll('.b-item').forEach(b=>b.classList.remove('active'));el.classList.add('active');showToast('Buka '+name);}
 </script>
 </body>
 </html>
