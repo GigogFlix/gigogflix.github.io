@@ -1,73 +1,102 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GIGOGFLIX ULTRA PREMIUM</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#0a0a12;color:#fff;padding-bottom:80px;font-family:sans-serif}
-.header{display:flex;justify-content:space-between;align-items:center;padding:15px}
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
+body{background:#0a0a12;color:#fff;padding-bottom:90px}
+.header{display:flex;justify-content:space-between;align-items:center;padding:15px 16px}
 .logo{font-weight:900;font-size:20px;line-height:1}
-.icons{display:flex;gap:8px}.icon{width:36px;height:36px;background:#1a1a2a;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer}
-.hero{margin:10px;border-radius:20px;overflow:hidden;position:relative;height:420px;background:#000}
-.hero img{width:100%;height:100%;object-fit:cover}
-.btn-row{display:flex;gap:10px;margin-top:15px;position:absolute;bottom:20px;left:15px;right:15px;z-index:2}
-.btn-row button{flex:1;padding:12px;border-radius:12px;border:none;font-weight:700;cursor:pointer}
-.section{padding:15px;display:flex;justify-content:space-between;align-items:center}
-.card{border-radius:18px;overflow:hidden;position:relative;height:180px;background:#1a1a2a;cursor:pointer}
+.logo span{color:#a78bfa;font-size:11px;letter-spacing:1px}
+.icons{display:flex;gap:10px}
+.icon{width:36px;height:36px;background:#1e1e2f;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.hero{margin:10px 14px;border-radius:20px;overflow:hidden;position:relative;height:430px;background:#000}
+.hero img{width:100%;height:100%;object-fit:cover;display:block}
+.btn-row{display:flex;gap:10px;position:absolute;bottom:16px;left:14px;right:14px;z-index:2}
+.btn-row button{flex:1;padding:13px;border-radius:14px;border:none;font-weight:800;font-size:14px;cursor:pointer}
+.section{padding:18px 16px 10px;display:flex;justify-content:space-between;align-items:center}
+.section h3{font-size:18px}
+.section span{color:#5cc8ff;font-size:13px;cursor:pointer}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 14px}
+.card{border-radius:18px;overflow:hidden;height:165px;background:#1a1a2a;cursor:pointer}
 .card img{width:100%;height:100%;object-fit:cover}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 15px}
-#player{position:fixed;top:0;left:0;right:0;bottom:0;background:#000;z-index:999;display:none;flex-direction:column}
+#player{position:fixed;inset:0;background:#000;z-index:999;display:none;flex-direction:column}
 #player.show{display:flex}
-.p-top{height:70px;background:#000;display:flex;align-items:center;padding:0 15px;gap:10px}
+.p-top{height:60px;display:flex;align-items:center;padding:0 14px;gap:12px;background:#000}
 .back{width:36px;height:36px;background:#222;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer}
-.video-wrap{flex:1;background:#000;position:relative}
+.video-wrap{flex:1}
 .video-wrap iframe{width:100%;height:100%;border:none}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#0f0f1a;border-top:1px solid #222;display:flex;justify-content:space-around;padding:10px 0;z-index:50}
-.b-item{display:flex;flex-direction:column;align-items:center;font-size:10px;gap:4px;color:#888;cursor:pointer}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#0f0f1a;border-top:1px solid #1f1f2e;display:flex;justify-content:space-around;padding:10px 0 18px;z-index:100}
+.b-item{display:flex;flex-direction:column;align-items:center;font-size:10px;gap:3px;color:#666;cursor:pointer;padding:4px 10px}
 .b-item.active{color:#6cf}
-#toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:#fff;color:#000;padding:10px 18px;border-radius:20px;font-weight:700;font-size:13px;z-index:1000;display:none}
+#toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:#fff;color:#000;padding:10px 18px;border-radius:20px;font-weight:700;font-size:13px;display:none;z-index:1000;white-space:nowrap}
 </style>
 </head>
 <body>
+
 <div class="header">
-  <div class="logo">GIGOGFLIX<br><span style="font-size:12px;color:#a78bfa">ULTRA PREMIUM</span></div>
+  <div class="logo">GIGOGFLIX<br><span>ULTRA PREMIUM</span></div>
   <div class="icons">
-    <div class="icon" onclick="showToast('Search dibuka')">🔍</div>
-    <div class="icon" onclick="showToast('Notifikasi: 3 baru')">🔔</div>
-    <div class="icon" onclick="showToast('Profile Ultra Premium ✓')">👤</div>
+    <div class="icon" onclick="klik('Search dibuka')">🔍</div>
+    <div class="icon" onclick="klik('3 Notifikasi baru')">🔔</div>
+    <div class="icon" onclick="klik('Profile Ultra Premium ✓')">👤</div>
   </div>
 </div>
+
 <div class="hero" onclick="playFilm()">
   <img src="https://images.unsplash.com/photo-1494783367193-149034c05e8f?q=80&w=800">
   <div class="btn-row">
     <button onclick="event.stopPropagation();playFilm()" style="background:#fff;color:#000">▶ Play</button>
-    <button onclick="event.stopPropagation();showToast('Ditambahkan ke My List ✓')" style="background:rgba(255,255,255,.2);color:#fff">+ My List</button>
+    <button onclick="event.stopPropagation();klik('Ditambahkan ke My List ✓')" style="background:rgba(255,255,255,0.25);color:#fff;backdrop-filter:blur(10px)">+ My List</button>
   </div>
 </div>
-<div class="section"><h3>Trending Now</h3><span onclick="showToast('Buka semua Trending Now →')" style="color:#6cf;font-size:13px;cursor:pointer">See all ></span></div>
+
+<div class="section">
+  <h3>Trending Now</h3>
+  <span onclick="klik('Buka semua Trending Now →')">See all ></span>
+</div>
+
 <div class="grid">
   <div class="card" onclick="playFilm()"><img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=400"></div>
   <div class="card" onclick="playFilm()"><img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?q=80&w=400"></div>
-  <div class="card" onclick="playFilm()"><img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=400"></div>
-  <div class="card" onclick="playFilm()"><img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=400"></div>
-  <div class="card" onclick="playFilm()"><img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?q=80&w=400"></div>
 </div>
-<div id="player"><div class="p-top"><div class="back" onclick="closePlayer()">✕</div><div>Now Playing</div></div><div class="video-wrap"><iframe id="filmFrame" src="" allowfullscreen></iframe></div></div>
+
+<div id="player">
+  <div class="p-top"><div class="back" onclick="tutup()">✕</div><div>Now Playing</div></div>
+  <div class="video-wrap"><iframe id="frame" src="" allowfullscreen></iframe></div>
+</div>
+
 <div class="bottom">
-  <div class="b-item active" onclick="navClick(this,'Home')">🏠<br>Home</div>
-  <div class="b-item" onclick="navClick(this,'Search')">🔍<br>Search</div>
-  <div class="b-item" onclick="navClick(this,'Downloads')">⬇️<br>Downloads</div>
-  <div class="b-item" onclick="navClick(this,'New & Hot')">🔥<br>New & Hot</div>
-  <div class="b-item" onclick="navClick(this,'Profile')">👤<br>Profile</div>
+  <div class="b-item active" onclick="nav(this,'Home')">🏠<span>Home</span></div>
+  <div class="b-item" onclick="nav(this,'Search')">🔍<span>Search</span></div>
+  <div class="b-item" onclick="nav(this,'Downloads')">⬇️<span>Downloads</span></div>
+  <div class="b-item" onclick="nav(this,'New & Hot')">🔥<span>New & Hot</span></div>
+  <div class="b-item" onclick="nav(this,'Profile')">👤<span>Profile</span></div>
 </div>
+
 <div id="toast"></div>
+
 <script>
 const filmId='1N2qr230u2XFyHHkKAlumamjoyFqYhWvE9vVvL8XwJzQ';
-function playFilm(){document.getElementById('filmFrame').src='https://drive.google.com/file/d/'+filmId+'/preview';document.getElementById('player').classList.add('show');}
-function closePlayer(){document.getElementById('player').classList.remove('show');document.getElementById('filmFrame').src='';}
-function showToast(t){let x=document.getElementById('toast');x.innerText=t;x.style.display='block';setTimeout(()=>x.style.display='none',2000);}
-function navClick(el,name){document.querySelectorAll('.b-item').forEach(b=>b.classList.remove('active'));el.classList.add('active');showToast('Buka '+name);}
+function playFilm(){
+  document.getElementById('frame').src='https://drive.google.com/file/d/'+filmId+'/preview';
+  document.getElementById('player').classList.add('show');
+}
+function tutup(){
+  document.getElementById('player').classList.remove('show');
+  document.getElementById('frame').src='';
+}
+function klik(t){
+  let x=document.getElementById('toast');
+  x.innerText=t; x.style.display='block';
+  setTimeout(()=>x.style.display='none',2000);
+}
+function nav(el,nama){
+  document.querySelectorAll('.b-item').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  klik('Buka '+nama);
+}
 </script>
 </body>
-</html>
+                                           </html>
