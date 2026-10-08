@@ -1,102 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>GIGOGFLIX ULTRA PREMIUM</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
-body{background:#0a0a12;color:#fff;padding-bottom:90px}
-.header{display:flex;justify-content:space-between;align-items:center;padding:15px 16px}
-.logo{font-weight:900;font-size:20px;line-height:1}
-.logo span{color:#a78bfa;font-size:11px;letter-spacing:1px}
-.icons{display:flex;gap:10px}
-.icon{width:36px;height:36px;background:#1e1e2f;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer}
-.hero{margin:10px 14px;border-radius:20px;overflow:hidden;position:relative;height:430px;background:#000}
-.hero img{width:100%;height:100%;object-fit:cover;display:block}
-.btn-row{display:flex;gap:10px;position:absolute;bottom:16px;left:14px;right:14px;z-index:2}
-.btn-row button{flex:1;padding:13px;border-radius:14px;border:none;font-weight:800;font-size:14px;cursor:pointer}
-.section{padding:18px 16px 10px;display:flex;justify-content:space-between;align-items:center}
-.section h3{font-size:18px}
-.section span{color:#5cc8ff;font-size:13px;cursor:pointer}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 14px}
-.card{border-radius:18px;overflow:hidden;height:165px;background:#1a1a2a;cursor:pointer}
-.card img{width:100%;height:100%;object-fit:cover}
-#player{position:fixed;inset:0;background:#000;z-index:999;display:none;flex-direction:column}
-#player.show{display:flex}
-.p-top{height:60px;display:flex;align-items:center;padding:0 14px;gap:12px;background:#000}
-.back{width:36px;height:36px;background:#222;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer}
-.video-wrap{flex:1}
-.video-wrap iframe{width:100%;height:100%;border:none}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#0f0f1a;border-top:1px solid #1f1f2e;display:flex;justify-content:space-around;padding:10px 0 18px;z-index:100}
-.b-item{display:flex;flex-direction:column;align-items:center;font-size:10px;gap:3px;color:#666;cursor:pointer;padding:4px 10px}
-.b-item.active{color:#6cf}
-#toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:#fff;color:#000;padding:10px 18px;border-radius:20px;font-weight:700;font-size:13px;display:none;z-index:1000;white-space:nowrap}
-</style>
-</head>
-<body>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',system-ui,sans-serif}
+body{background:#050510;color:#fff;min-height:100vh;padding-bottom:100px;overflow-x:hidden}
+body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at top,#1a1a3a 0%,#050510 60%);z-index:-1}
+.phone{max-width:430px;margin:0 auto;position:relative;padding:10px}
+.glass{backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);background:linear-gradient(135deg,rgba(255,255,255,0.12),rgba(255,255,255,0.04));border:1px solid rgba(255,255,255,0.15)}
 
-<div class="header">
-  <div class="logo">GIGOGFLIX<br><span>ULTRA PREMIUM</span></div>
-  <div class="icons">
-    <div class="icon" onclick="klik('Search dibuka')">🔍</div>
-    <div class="icon" onclick="klik('3 Notifikasi baru')">🔔</div>
-    <div class="icon" onclick="klik('Profile Ultra Premium ✓')">👤</div>
-  </div>
-</div>
+/* HEADER */
+.header{border-radius:22px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.logo-text{font-weight:900;font-size:24px;background:linear-gradient(90deg,#f5d76e,#a67c00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-1px}
+.badge-ultra{border:1px solid #c9a84c;color:#e8c97a;font-size:10px;padding:4px 10px;border-radius:20px;margin-left:8px;letter-spacing:1px}
+.h-icons{display:flex;gap:10px}
+.h-icon{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer}
 
-<div class="hero" onclick="playFilm()">
-  <img src="https://images.unsplash.com/photo-1494783367193-149034c05e8f?q=80&w=800">
-  <div class="btn-row">
-    <button onclick="event.stopPropagation();playFilm()" style="background:#fff;color:#000">▶ Play</button>
-    <button onclick="event.stopPropagation();klik('Ditambahkan ke My List ✓')" style="background:rgba(255,255,255,0.25);color:#fff;backdrop-filter:blur(10px)">+ My List</button>
-  </div>
-</div>
+/* HERO */
+.hero{border-radius:24px;overflow:hidden;position:relative;height:520px;background:#000}
+.hero-bg{width:100%;height:100%;object-fit:cover}
+.hero::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(to bottom,rgba(0,0,0,0) 10%,rgba(0,0,0,0.9) 100%)}
+.top-badge{position:absolute;top:16px;right:16px;z-index:3;background:rgba(201,168,76,0.15);border:1px solid #c9a84c;color:#f5d76e;padding:6px 14px;border-radius:20px;font-size:11px;font-weight:600}
+.hero-content{position:absolute;bottom:0;left:0;right:0;padding:20px;z-index:3}
+.hero-card{border-radius:20px;padding:18px}
+.hero-card h1{font-size:32px;font-weight:900;letter-spacing:1px;background:linear-gradient(90deg,#f5d76e,#fff2c0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+.meta{font-size:12px;color:#ccc;margin-bottom:10px}
+.desc{font-size:13px;color:#aaa;line-height:1.5;margin-bottom:18px}
+.btn-row{display:flex;gap:12px}
+.btn-play{flex:1.2;background:linear-gradient(135deg,#f5d76e,#c9a84c);color:#000;border:none;padding:14px;border-radius:14px;font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;box-shadow:0 0 20px rgba(245,215,110,0.4)}
+.btn-list{flex:1;background:rgba(255,255,255,0.08);border:1px solid rgba(201,168,76,0.5);color:#fff;padding:14px;border-radius:14px;font-weight:600;font-size:15px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer}
 
-<div class="section">
-  <h3>Trending Now</h3>
-  <span onclick="klik('Buka semua Trending Now →')">See all ></span>
-</div>
+/* TRENDING */
+.sec-head{display:flex;justify-content:space-between;align-items:center;margin:24px 6px 14px}
+.sec-head h3{font-size:22px;font-weight:700}
+.sec-head span{color:#f5d76e;font-size:13px;cursor:pointer}
+.trend{display:flex;gap:10px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none}
+.trend::-webkit-scrollbar{display:none}
+.t-card{min-width:115px;width:115px;height:200px;border-radius:14px;overflow:hidden;position:relative;background:#111;border:1px solid rgba(255,255,255,0.1);cursor:pointer;flex-shrink:0}
+.t-card img{width:100%;height:100%;object-fit:cover}
+.t-card.active{border:1px solid #f5d76e;box-shadow:0 0 15px rgba(245,215,110,0.5)}
+.t-info{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.95));padding:30px 8px 8px}
+.t-info b{display:block;font-size:13px;line-height:1.1}
+.t-info small{font-size:9px;color:#aaa}
 
-<div class="grid">
-  <div class="card" onclick="playFilm()"><img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=400"></div>
-  <div class="card" onclick="playFilm()"><img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?q=80&w=400"></div>
-</div>
-
-<div id="player">
-  <div class="p-top"><div class="back" onclick="tutup()">✕</div><div>Now Playing</div></div>
-  <div class="video-wrap"><iframe id="frame" src="" allowfullscreen></iframe></div>
-</div>
-
-<div class="bottom">
-  <div class="b-item active" onclick="nav(this,'Home')">🏠<span>Home</span></div>
-  <div class="b-item" onclick="nav(this,'Search')">🔍<span>Search</span></div>
-  <div class="b-item" onclick="nav(this,'Downloads')">⬇️<span>Downloads</span></div>
-  <div class="b-item" onclick="nav(this,'New & Hot')">🔥<span>New & Hot</span></div>
-  <div class="b-item" onclick="nav(this,'Profile')">👤<span>Profile</span></div>
-</div>
-
-<div id="toast"></div>
-
-<script>
-const filmId='1N2qr230u2XFyHHkKAlumamjoyFqYhWvE9vVvL8XwJzQ';
-function playFilm(){
-  document.getElementById('frame').src='https://drive.google.com/file/d/'+filmId+'/preview';
-  document.getElementById('player').classList.add('show');
-}
-function tutup(){
-  document.getElementById('player').classList.remove('show');
-  document.getElementById('frame').src='';
-}
-function klik(t){
-  let x=document.getElementById('toast');
-  x.innerText=t; x.style.display='block';
-  setTimeout(()=>x.style.display='none',2000);
-}
-function nav(el,nama){
-  document.querySelectorAll('.b-item').forEach(b=>b.classList.remove('active'));
-  el.classList.add('active');
-  klik('Buka '+nama);
-}
-</script>
-</body>
-                                           </html>
+/* BOTTOM */
+.bottom{position:fixed;bottom:16
